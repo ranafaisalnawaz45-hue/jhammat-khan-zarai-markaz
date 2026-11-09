@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#14532d">
+<meta name="description" content="Jhammat & Khan Zarai Markaz - Agricultural products and farmer support in Wadhi, Shahpur, Sargodha.">
 <title>Jhammat & Khan Zarai Markaz</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -11,95 +12,355 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:Arial,sans-serif;background:#f4f8f1;color:#203b2a}
-button,a{cursor:pointer}
-button{background:#176b37;color:white;border:0;border-radius:9px;padding:12px 18px;font-weight:bold}
-button:hover{background:#104d29;transform:translateY(-1px)}
-input,select,textarea{width:100%;padding:12px;margin:6px 0 12px;border:1px solid #d4dfd4;border-radius:8px;font-size:15px}
-label{font-weight:bold}
-header{background:#14532d;color:white;padding:15px 5%;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
-.brand{display:flex;align-items:center;gap:12px}
-.brand-icon{font-size:37px}
-.brand h1{font-size:21px;margin:0}
-.brand p{font-size:12px;margin:5px 0 0;color:#d5edda}
-nav{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
-nav a{color:white;text-decoration:none;font-weight:bold;font-size:14px}
-nav a:hover{color:#c7ef9b}
-.hero{
-min-height:430px;
-display:flex;align-items:center;
-padding:55px 7%;
-color:white;
-background:linear-gradient(90deg,rgba(9,48,25,.91),rgba(9,48,25,.52),rgba(9,48,25,.12)),
-url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1800") center/cover;
+:root {
+ --green:#14532d;
+ --dark:#092d19;
+ --light:#e9f5e7;
+ --lime:#b8e986;
+ --gold:#e8b94d;
+ --text:#203b2a;
+ --muted:#6b7d70;
+ --white:#fff;
+ --shadow:0 12px 35px rgba(20,83,45,.10);
 }
-.hero-content{max-width:650px}
-.hero-tag{display:inline-block;background:#d4f0b1;color:#14532d;padding:9px 15px;border-radius:30px;font-size:13px;font-weight:bold}
-.hero h2{font-size:clamp(34px,6vw,58px);line-height:1.1;margin:20px 0;color:white}
-.hero p{font-size:17px;line-height:1.7;max-width:550px}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
-.btn-light{background:#fff;color:#14532d}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:85px}
+body{
+ margin:0;
+ font-family:Arial,Helvetica,sans-serif;
+ background:#f5f8f2;
+ color:var(--text);
+}
+button,a{cursor:pointer}
+button{
+ background:var(--green);
+ color:white;
+ border:0;
+ border-radius:9px;
+ padding:12px 18px;
+ font-weight:bold;
+ transition:.25s;
+}
+button:hover{
+ background:#0b3c20;
+ transform:translateY(-2px);
+ box-shadow:0 5px 15px #0002;
+}
+input,select,textarea{
+ width:100%;
+ padding:13px;
+ margin:7px 0 14px;
+ border:1px solid #d6e1d5;
+ border-radius:9px;
+ font-size:15px;
+ background:white;
+ color:#263b2d;
+}
+input:focus,select:focus,textarea:focus{
+ outline:2px solid #8fcf8e;
+ border-color:var(--green);
+}
+label{font-weight:bold;font-size:14px}
+header{
+ background:rgba(9,45,25,.97);
+ color:white;
+ padding:13px 5%;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:15px;
+ flex-wrap:wrap;
+ position:sticky;
+ top:0;
+ z-index:100;
+ box-shadow:0 4px 20px #0002;
+}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-icon{
+ width:49px;height:49px;
+ border-radius:15px;
+ background:#d5efb9;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ font-size:30px;
+}
+.brand h1{font-size:20px;margin:0}
+.brand p{font-size:11px;margin:5px 0 0;color:#c5e6c5}
+nav{display:flex;gap:19px;align-items:center;flex-wrap:wrap}
+nav a{
+ color:white;
+ text-decoration:none;
+ font-size:13px;
+ font-weight:bold;
+}
+nav a:hover{color:var(--lime)}
+.hero{
+ min-height:540px;
+ display:flex;
+ align-items:center;
+ padding:65px 8%;
+ color:white;
+ background:
+ linear-gradient(90deg,rgba(5,36,18,.95),rgba(9,48,25,.68),rgba(9,48,25,.10)),
+ url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1800") center/cover;
+}
+.hero-content{max-width:690px}
+.hero-tag{
+ display:inline-block;
+ background:var(--lime);
+ color:var(--green);
+ padding:10px 17px;
+ border-radius:30px;
+ font-size:12px;
+ font-weight:bold;
+ letter-spacing:1px;
+}
+.hero h2{
+ font-size:clamp(39px,6vw,68px);
+ line-height:1.08;
+ margin:22px 0;
+ color:white;
+}
+.hero h2 span{color:var(--lime)}
+.hero p{
+ font-size:17px;
+ line-height:1.8;
+ max-width:550px;
+ color:#e5f0e5;
+}
+.hero-actions{display:flex;gap:13px;flex-wrap:wrap;margin-top:27px}
+.btn-light{background:white;color:var(--green)}
 .btn-outline{background:transparent;border:2px solid white}
-main{max-width:1200px;margin:auto;padding:20px}
-section{margin:35px 0}
-.section-heading{text-align:center;margin-bottom:25px}
-.section-heading h2{font-size:30px;color:#176b37;margin-bottom:8px}
-.section-heading p{color:#65796a}
-.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px;margin-top:-25px;position:relative}
-.feature{background:white;padding:20px;border-radius:14px;box-shadow:0 5px 20px #1231;text-align:center}
-.feature span{font-size:32px}
-.feature h3{margin:10px 0 5px;color:#176b37}
-.feature p{font-size:13px;color:#718074;margin:0}
-.categories{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
-.category-card{height:220px;border-radius:15px;overflow:hidden;position:relative;background:#1c5130;color:white;box-shadow:0 5px 15px #0002}
-.category-card img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
-.category-card:hover img{transform:scale(1.08)}
-.category-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.8),transparent 75%);display:flex;flex-direction:column;justify-content:flex-end;padding:18px}
+main{max-width:1250px;margin:auto;padding:25px}
+section{margin:48px 0}
+.section-heading{text-align:center;margin-bottom:30px}
+.section-heading h2{font-size:31px;color:var(--green);margin:0 0 9px}
+.section-heading p{color:var(--muted);line-height:1.6}
+.features{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:17px;
+ margin-top:-45px;
+ position:relative;
+ z-index:2;
+}
+.feature{
+ background:white;
+ padding:25px 15px;
+ border-radius:15px;
+ text-align:center;
+ box-shadow:var(--shadow);
+ border-bottom:3px solid #8dc66f;
+}
+.feature span{font-size:35px}
+.feature h3{margin:12px 0 7px;color:var(--green)}
+.feature p{font-size:13px;color:var(--muted);margin:0;line-height:1.5}
+.categories{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:18px;
+}
+.category-card{
+ height:230px;
+ border-radius:16px;
+ overflow:hidden;
+ position:relative;
+ background:var(--green);
+ box-shadow:var(--shadow);
+}
+.category-card img{
+ width:100%;height:100%;
+ object-fit:cover;
+ transition:transform .5s;
+}
+.category-card:hover img{transform:scale(1.1)}
+.category-overlay{
+ position:absolute;
+ inset:0;
+ background:linear-gradient(0deg,rgba(0,0,0,.85),transparent 80%);
+ display:flex;
+ flex-direction:column;
+ justify-content:flex-end;
+ padding:20px;
+ color:white;
+}
 .category-overlay h3{margin:0;font-size:21px}
-.category-overlay p{margin:6px 0 0;font-size:13px}
-.products-section{background:white;padding:25px;border-radius:18px;box-shadow:0 4px 18px #0001}
-.product-tools{max-width:500px;margin:0 auto 22px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px}
-.product{border:1px solid #e3e9e1;border-radius:14px;padding:12px;background:white;overflow:hidden;transition:.2s}
-.product:hover{box-shadow:0 8px 22px #0002;transform:translateY(-3px)}
-.product img{width:100%;height:175px;object-fit:cover;background:#f2f6ef;border-radius:10px}
-.product-placeholder{height:175px;background:linear-gradient(135deg,#e4f3dc,#f4f8ed);display:flex;align-items:center;justify-content:center;font-size:65px;border-radius:10px}
-.product h3{margin:13px 0 5px;color:#204a2d}
-.product p{font-size:13px;color:#69786b}
-.price{font-size:20px;font-weight:bold;color:#176b37!important}
-.product button{width:100%;margin:5px 0 0}
-.about-strip{background:#e5f2df;border-radius:18px;padding:30px;display:grid;grid-template-columns:1fr 1fr;gap:25px;align-items:center}
-.about-strip img{width:100%;height:260px;object-fit:cover;border-radius:14px}
-.about-strip h2{color:#176b37}
-.about-strip p{line-height:1.8;color:#526b57}
-.contact-card{background:#14532d;color:white;padding:30px;border-radius:18px;text-align:center}
-.contact-card h2{color:white}
+.category-overlay p{margin:7px 0 0;font-size:13px}
+.products-section{
+ background:white;
+ padding:30px;
+ border-radius:20px;
+ box-shadow:var(--shadow);
+}
+.product-tools{max-width:520px;margin:0 auto 25px}
+.grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(215px,1fr));
+ gap:19px;
+}
+.product{
+ border:1px solid #e5ebe2;
+ border-radius:15px;
+ padding:13px;
+ background:white;
+ transition:.25s;
+ overflow:hidden;
+}
+.product:hover{box-shadow:var(--shadow);transform:translateY(-4px)}
+.product img,.product-placeholder{
+ width:100%;
+ height:180px;
+ object-fit:cover;
+ border-radius:11px;
+}
+.product-placeholder{
+ background:linear-gradient(135deg,#dcefd2,#f3f8e9);
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ font-size:65px;
+}
+.product h3{margin:14px 0 6px;color:var(--green)}
+.product p{font-size:13px;color:var(--muted);line-height:1.5}
+.price{font-size:21px!important;font-weight:bold;color:var(--green)!important}
+.product button{width:100%;margin-top:5px}
+.about-strip{
+ background:#e8f3e1;
+ border-radius:20px;
+ padding:35px;
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:30px;
+ align-items:center;
+}
+.about-strip img{
+ width:100%;
+ height:300px;
+ object-fit:cover;
+ border-radius:15px;
+}
+.about-strip h2{color:var(--green);font-size:30px}
+.about-strip p{line-height:1.9;color:#536d59}
+.about-points{display:flex;gap:15px;flex-wrap:wrap;margin:20px 0}
+.about-points span{
+ background:white;padding:10px 14px;border-radius:8px;
+ font-size:13px;font-weight:bold;color:var(--green);
+}
+.contact-card{
+ background:linear-gradient(135deg,#14532d,#092d19);
+ color:white;
+ padding:40px 20px;
+ border-radius:20px;
+ text-align:center;
+ box-shadow:var(--shadow);
+}
+.contact-card h2{color:white;font-size:30px}
 .contact-card p{line-height:1.8}
 .contact-card a{color:white}
-footer{background:#103d24;color:white;padding:28px 15px;text-align:center;margin-top:40px}
-footer p{margin:8px}
-.small{font-size:13px;color:#777}
+footer{
+ background:#092d19;
+ color:white;
+ padding:35px 15px;
+ text-align:center;
+ margin-top:50px;
+}
+footer h3{color:#d5efb9}
+footer p{margin:9px;font-size:13px;color:#d1e3d2}
 .hidden{display:none!important}
-.panel{background:white;padding:18px;margin:15px 0;border-radius:12px;box-shadow:0 2px 9px #0001}
-.tabs{display:flex;flex-wrap:wrap;gap:5px;margin:15px 0}
-.tabs button{flex:1;min-width:105px}
-.stat{background:#e6f2e8;padding:15px;border-radius:9px}
-.stat strong{font-size:22px;display:block;margin-top:5px}
-.admin-title{color:#176b37}
-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:14px}
-th,td{border:1px solid #ddd;padding:9px;text-align:left}
-th{background:#e6f2e8}
+.panel{
+ background:white;
+ padding:22px;
+ margin:16px 0;
+ border-radius:14px;
+ box-shadow:0 3px 15px #0001;
+ overflow-x:auto;
+}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.tabs button{flex:1;min-width:110px}
+.stat{
+ background:#e7f3e6;
+ padding:17px;
+ border-radius:12px;
+ color:#42634a;
+ font-size:13px;
+}
+.stat strong{
+ font-size:22px;
+ display:block;
+ margin-top:8px;
+ color:var(--green);
+}
+.admin-title{color:var(--green)}
+table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px;min-width:500px}
+th,td{border:1px solid #e0e8df;padding:10px;text-align:left}
+th{background:#e6f2e8;color:var(--green)}
 .red{background:#b83232}
+.red:hover{background:#8d2020}
+.small{font-size:12px;color:#777}
+.admin-login{
+ max-width:550px;
+ margin:40px auto;
+ padding:25px;
+ background:white;
+ border-radius:16px;
+ box-shadow:var(--shadow);
+}
+.admin-login h2{color:var(--green)}
+.badge{
+ display:inline-block;
+ background:#e3f4d9;
+ color:var(--green);
+ padding:6px 10px;
+ border-radius:20px;
+ font-size:12px;
+ font-weight:bold;
+}
+#loginMessage{color:#b83232}
+.whatsapp-float{
+ position:fixed;
+ bottom:22px;
+ right:20px;
+ z-index:200;
+ background:#168c48;
+ color:white;
+ width:57px;
+ height:57px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ border-radius:50%;
+ text-decoration:none;
+ font-size:29px;
+ box-shadow:0 5px 20px #0003;
+}
+@media(max-width:850px){
+ .features,.categories{grid-template-columns:repeat(2,1fr)}
+}
 @media(max-width:650px){
-header{justify-content:center;text-align:center}
-nav{justify-content:center;gap:13px}
-.hero{min-height:390px;padding:40px 7%}
-.hero h2{font-size:37px}
-.about-strip{grid-template-columns:1fr}
-.features{margin-top:15px}
-.products-section{padding:14px}
+ header{justify-content:center;text-align:center;padding:13px}
+ .brand{justify-content:center}
+ .brand h1{font-size:17px}
+ nav{justify-content:center;gap:12px}
+ nav a{font-size:12px}
+ .hero{min-height:450px;padding:45px 7%}
+ .hero h2{font-size:42px}
+ .features{margin-top:15px;grid-template-columns:repeat(2,1fr)}
+ .categories{grid-template-columns:repeat(2,1fr);gap:10px}
+ .category-card{height:180px}
+ .category-overlay{padding:12px}
+ .category-overlay h3{font-size:16px}
+ .about-strip{grid-template-columns:1fr;padding:22px}
+ .about-strip img{height:220px}
+ main{padding:14px}
+ .products-section{padding:15px}
+ .grid{grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px}
+ .product img,.product-placeholder{height:135px}
+ .product{padding:9px}
+ .product h3{font-size:15px}
+ .product button{padding:10px 5px;font-size:12px}
+ .section-heading h2{font-size:25px}
+ .panel{padding:13px}
 }
 </style>
 </head>
@@ -126,8 +387,8 @@ nav{justify-content:center;gap:13px}
 <section class="hero" id="home">
 <div class="hero-content">
 <span class="hero-tag">🌱 YOUR TRUSTED AGRICULTURAL PARTNER</span>
-<h2>Better Farming Starts Here</h2>
-<p>Quality agricultural products and farmer support for a healthier, more productive harvest.</p>
+<h2>Better Farming <span>Starts Here</span></h2>
+<p>Quality agricultural products and farmer support for a healthier, more productive harvest. Helping our farming community grow with confidence.</p>
 <div class="hero-actions">
 <a href="#products"><button>Explore Products →</button></a>
 <a href="https://wa.me/923468600616"><button class="btn-light">WhatsApp Us</button></a>
@@ -162,49 +423,35 @@ nav{justify-content:center;gap:13px}
 
 <section id="categories">
 <div class="section-heading">
+<span class="badge">OUR AGRICULTURAL RANGE</span>
 <h2>Explore Our Categories</h2>
-<p>Explore agricultural product categories</p>
+<p>Everything you need to support your farming activities.</p>
 </div>
-
 <div class="categories">
 <div class="category-card">
 <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=700" alt="Agricultural crops">
-<div class="category-overlay">
-<h3>🌾 Fertilisers</h3>
-<p>Supporting healthy crop growth</p>
+<div class="category-overlay"><h3>🌾 Fertilisers</h3><p>Supporting healthy crop growth</p></div>
 </div>
-</div>
-
 <div class="category-card">
 <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=700" alt="Green farmland">
-<div class="category-overlay">
-<h3>🌱 Seeds</h3>
-<p>Start your next growing season</p>
+<div class="category-overlay"><h3>🌱 Seeds</h3><p>Start your next growing season</p></div>
 </div>
-</div>
-
 <div class="category-card">
 <img src="https://images.unsplash.com/photo-1499529112087-3cb3b73cec95?w=700" alt="Farm crops">
-<div class="category-overlay">
-<h3>🛡️ Crop Protection</h3>
-<p>Explore crop-care products</p>
+<div class="category-overlay"><h3>🛡️ Crop Protection</h3><p>Explore crop-care products</p></div>
 </div>
-</div>
-
 <div class="category-card">
 <img src="https://images.unsplash.com/photo-1592982537447-6f2a6a0a2f6a?w=700" alt="Agricultural field">
-<div class="category-overlay">
-<h3>🚜 Farm Supplies</h3>
-<p>Useful agricultural essentials</p>
-</div>
+<div class="category-overlay"><h3>🚜 Farm Supplies</h3><p>Agricultural essentials</p></div>
 </div>
 </div>
 </section>
 
 <section id="products" class="products-section">
 <div class="section-heading">
+<span class="badge">SHOP AGRICULTURAL PRODUCTS</span>
 <h2>Our Products</h2>
-<p>Browse our available agricultural products</p>
+<p>Browse available products and contact us directly to order.</p>
 </div>
 <div class="product-tools">
 <input id="search" placeholder="🔍 Search products..." oninput="renderProducts()">
@@ -215,9 +462,15 @@ nav{justify-content:center;gap:13px}
 <section id="about">
 <div class="about-strip">
 <div>
+<span class="badge">ABOUT OUR BUSINESS</span>
 <h2>Growing With Our Farmers 🌿</h2>
 <p>Jhammat & Khan Zarai Markaz is based in Wadhi, Shahpur, Sargodha. We aim to support local farmers by providing access to agricultural products and a convenient way to contact our store.</p>
-<p>Contact us to ask about product availability and prices.</p>
+<p>Our goal is to make finding agricultural supplies easier for our local farming community.</p>
+<div class="about-points">
+<span>🌾 Quality</span>
+<span>🤝 Trust</span>
+<span>🌱 Growth</span>
+</div>
 <a href="https://wa.me/923468600616"><button>Talk to Our Team</button></a>
 </div>
 <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=900" alt="Agricultural landscape">
@@ -226,6 +479,7 @@ nav{justify-content:center;gap:13px}
 
 <section id="contact">
 <div class="contact-card">
+<span class="badge">WE ARE HERE TO HELP</span>
 <h2>Visit or Contact Us</h2>
 <p>📍 Wadhi near PSO Pump, Tehsil Shahpur, District Sargodha, Punjab, Pakistan</p>
 <p>📞 +92 346 8600616</p>
@@ -233,20 +487,25 @@ nav{justify-content:center;gap:13px}
 </div>
 </section>
 
-<section>
-<h2 class="admin-title">🔐 Owner Login</h2>
+<section id="owner">
+<div class="admin-login">
+<h2>🔐 Owner Login</h2>
+<p class="small">Authorised business management access only.</p>
 <div id="loginBox">
-<input id="email" type="email" placeholder="Owner email">
-<input id="password" type="password" placeholder="Password">
-<button onclick="login()">Login</button>
+<label>Owner email</label>
+<input id="email" type="email" placeholder="Owner email" autocomplete="username">
+<label>Password</label>
+<input id="password" type="password" placeholder="Password" autocomplete="current-password">
+<button onclick="login()">Login to Dashboard →</button>
 <p id="loginMessage"></p>
 </div>
 
 <div id="admin" class="hidden">
 <h2 class="admin-title">Shop Management Dashboard</h2>
-<button onclick="logout()">Logout</button>
+<p><span class="badge">OWNER ACCESS</span></p>
+<button onclick="logout()" class="red">Logout</button>
 
-<div class="grid">
+<div class="grid" style="margin-top:20px">
 <div class="stat">Products<strong id="statProducts">0</strong></div>
 <div class="stat">Stock units<strong id="statStock">0</strong></div>
 <div class="stat">Total sales<strong id="statSales">PKR 0</strong></div>
@@ -254,12 +513,12 @@ nav{justify-content:center;gap:13px}
 </div>
 
 <div class="tabs">
-<button onclick="showTab('productsTab')">Products & Stock</button>
-<button onclick="showTab('salesTab')">Sales</button>
-<button onclick="showTab('purchasesTab')">Purchases</button>
-<button onclick="showTab('expensesTab')">Expenses</button>
-<button onclick="showTab('reportsTab')">Reports</button>
-<button onclick="showTab('viewersTab')">Real-Time Viewers</button>
+<button onclick="showTab('productsTab')">📦 Products & Stock</button>
+<button onclick="showTab('salesTab')">💰 Sales</button>
+<button onclick="showTab('purchasesTab')">🛒 Purchases</button>
+<button onclick="showTab('expensesTab')">💳 Expenses</button>
+<button onclick="showTab('reportsTab')">📊 Reports</button>
+<button onclick="showTab('viewersTab')">👁 Viewers</button>
 </div>
 
 <div id="productsTab" class="panel">
@@ -277,7 +536,7 @@ nav{justify-content:center;gap:13px}
 <label>Description</label><textarea id="pDescription"></textarea>
 <label>Product image (optional)</label><input id="pImage" type="file" accept="image/*">
 <button onclick="saveProduct()">Save Product</button>
-<button onclick="clearProduct()">Clear</button>
+<button onclick="clearProduct()" class="red">Clear</button>
 <h3>Manage Products</h3>
 <div id="manageProducts"></div>
 </div>
@@ -341,8 +600,11 @@ nav{justify-content:center;gap:13px}
 <p class="small">Counts browser sessions active within the last 2 minutes.</p>
 </div>
 </div>
+</div>
 </section>
 </main>
+
+<a class="whatsapp-float" href="https://wa.me/923468600616" aria-label="WhatsApp">☏</a>
 
 <footer>
 <h3>🌿 Jhammat & Khan Zarai Markaz</h3>
@@ -357,254 +619,412 @@ const SUPABASE_URL="https://kdavpmdioiztfhvdczlz.supabase.co";
 const SUPABASE_KEY="sb_publishable_icXsw0UUDfn1ULktMav2kQ_3C9dUPRm";
 const db=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 const OWNER_ID="272cec25-35ff-47c8-9ffb-21ed1a69d6f5";
+
 let products=[],sales=[],saleItems=[],purchases=[],purchaseItems=[],expenses=[];
 
-function money(n){return "PKR "+Number(n||0).toLocaleString("en-PK",{maximumFractionDigits:2})}
-function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-
+function money(n){
+ return "PKR "+Number(n||0).toLocaleString("en-PK",{maximumFractionDigits:2});
+}
+function esc(s){
+ return String(s??"").replace(/[&<>"']/g,c=>({
+ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ }[c]));
+}
 function showTab(id){
-document.querySelectorAll("#admin .panel").forEach(x=>x.classList.add("hidden"));
-document.getElementById(id).classList.remove("hidden");
-if(id==="viewersTab")loadViewers();
-if(id==="reportsTab")loadTraffic();
+ document.querySelectorAll("#admin .panel").forEach(x=>x.classList.add("hidden"));
+ document.getElementById(id).classList.remove("hidden");
+ if(id==="viewersTab")loadViewers();
+ if(id==="reportsTab")loadTraffic();
 }
 
 async function login(){
-let {data,error}=await db.auth.signInWithPassword({email:email.value,password:password.value});
-if(error){loginMessage.textContent=error.message;return}
-if(data.user.id!==OWNER_ID){await db.auth.signOut();loginMessage.textContent="This account is not authorised.";return}
-openAdmin();
+ const {data,error}=await db.auth.signInWithPassword({
+ email:document.getElementById("email").value,
+ password:document.getElementById("password").value
+ });
+ if(error){
+ document.getElementById("loginMessage").textContent=error.message;
+ return;
+ }
+ if(data.user.id!==OWNER_ID){
+ await db.auth.signOut();
+ document.getElementById("loginMessage").textContent="This account is not authorised.";
+ return;
+ }
+ document.getElementById("loginMessage").textContent="";
+ await openAdmin();
 }
-async function logout(){await db.auth.signOut();admin.classList.add("hidden");loginBox.classList.remove("hidden")}
+async function logout(){
+ await db.auth.signOut();
+ document.getElementById("admin").classList.add("hidden");
+ document.getElementById("loginBox").classList.remove("hidden");
+}
 async function openAdmin(){
-loginBox.classList.add("hidden");admin.classList.remove("hidden");
-await loadAll();
+ document.getElementById("loginBox").classList.add("hidden");
+ document.getElementById("admin").classList.remove("hidden");
+ await loadAll();
 }
 
 async function loadProducts(){
-let {data,error}=await db.from("products").select("*").order("name");
-if(error){productList.textContent=error.message;return}
-products=data||[];renderProducts();
+ const {data,error}=await db.from("products").select("*").order("name");
+ if(error){
+ document.getElementById("productList").textContent="Products could not load: "+error.message;
+ return;
+ }
+ products=data||[];
+ renderProducts();
 }
-
 function productEmoji(category){
-let c=(category||"").toLowerCase();
-if(c.includes("seed"))return "🌱";
-if(c.includes("fertil"))return "🌾";
-if(c.includes("pest")||c.includes("insect"))return "🛡️";
-if(c.includes("herbi"))return "🌿";
-return "🚜";
+ const c=(category||"").toLowerCase();
+ if(c.includes("seed"))return "🌱";
+ if(c.includes("fertil"))return "🌾";
+ if(c.includes("pest")||c.includes("insect"))return "🛡️";
+ if(c.includes("herbi"))return "🌿";
+ return "🚜";
 }
-
 function renderProducts(){
-let q=(search.value||"").toLowerCase();
-let list=products.filter(p=>(p.name||"").toLowerCase().includes(q)||(p.category||"").toLowerCase().includes(q));
-productList.innerHTML=list.length?list.map(p=>`
-<div class="product">
-${p.image_url?`<img src="${esc(p.image_url)}" alt="${esc(p.name)}">`:`<div class="product-placeholder">${productEmoji(p.category)}</div>`}
-<h3>${esc(p.name)}</h3>
-<p>${esc(p.category||"Agricultural product")}</p>
-<p>${esc(p.description||"")}</p>
-<p class="price">${money(p.price)}</p>
-<a href="https://wa.me/923468600616?text=${encodeURIComponent("I am interested in "+p.name)}"><button>Order on WhatsApp</button></a>
-</div>`).join(""):"No products available yet.";
+ const q=(document.getElementById("search").value||"").toLowerCase();
+ const list=products.filter(p=>
+ (p.name||"").toLowerCase().includes(q)||
+ (p.category||"").toLowerCase().includes(q)
+ );
+ document.getElementById("productList").innerHTML=list.length?
+ list.map(p=>`
+ <div class="product">
+ ${p.image_url?
+ `<img src="${esc(p.image_url)}" alt="${esc(p.name)}" loading="lazy">`:
+ `<div class="product-placeholder">${productEmoji(p.category)}</div>`}
+ <h3>${esc(p.name)}</h3>
+ <p>${esc(p.category||"Agricultural product")}</p>
+ <p>${esc(p.description||"")}</p>
+ <p class="price">${money(p.price)}</p>
+ <a href="https://wa.me/923468600616?text=${encodeURIComponent("I am interested in "+p.name)}">
+ <button>Order on WhatsApp</button></a>
+ </div>`).join(""):
+ "<p>No products available yet.</p>";
 }
 
 async function saveProduct(){
-let id=productId.value;
-let name=pName.value.trim(),price=Number(pPrice.value),cost=Number(pCost.value),stock=Number(pStock.value);
-if(!name||price<0||stock<0){alert("Enter valid product details.");return}
-let imageUrl=null;
-let file=pImage.files[0];
-if(file){
-let path=Date.now()+"-"+file.name.replace(/[^a-zA-Z0-9._-]/g,"_");
-let {error}=await db.storage.from("product-images").upload(path,file,{upsert:true});
-if(error){alert("Image upload failed: "+error.message);return}
-imageUrl=db.storage.from("product-images").getPublicUrl(path).data.publicUrl;
-}
-let record={name,category:pCategory.value,price,cost_price:cost,stock_quantity:stock,stock_status:stock>0?"In Stock":"Out of Stock",description:pDescription.value};
-if(imageUrl)record.image_url=imageUrl;
-let result=id?await db.from("products").update(record).eq("id",id):await db.from("products").insert(record);
-if(result.error){alert(result.error.message);return}
-alert("Product saved.");clearProduct();await loadAll();
+ const id=document.getElementById("productId").value;
+ const name=document.getElementById("pName").value.trim();
+ const price=Number(document.getElementById("pPrice").value);
+ const cost=Number(document.getElementById("pCost").value);
+ const stock=Number(document.getElementById("pStock").value);
+ if(!name||!Number.isFinite(price)||price<0||!Number.isFinite(cost)||cost<0||!Number.isFinite(stock)||stock<0){
+ alert("Enter valid product details.");return;
+ }
+ let imageUrl=null;
+ const file=document.getElementById("pImage").files[0];
+ if(file){
+ if(file.size>5*1024*1024){alert("Please use an image smaller than 5 MB.");return;}
+ const path=Date.now()+"-"+file.name.replace(/[^a-zA-Z0-9._-]/g,"_");
+ const {error}=await db.storage.from("product-images").upload(path,file,{upsert:true});
+ if(error){alert("Image upload failed: "+error.message);return;}
+ imageUrl=db.storage.from("product-images").getPublicUrl(path).data.publicUrl;
+ }
+ const record={
+ name,
+ category:document.getElementById("pCategory").value,
+ price,cost_price:cost,
+ stock_quantity:stock,
+ stock_status:stock>0?"In Stock":"Out of Stock",
+ description:document.getElementById("pDescription").value
+ };
+ if(imageUrl)record.image_url=imageUrl;
+ const result=id?
+ await db.from("products").update(record).eq("id",id):
+ await db.from("products").insert(record);
+ if(result.error){alert(result.error.message);return;}
+ alert("Product saved successfully.");
+ clearProduct();
+ await loadAll();
 }
 function clearProduct(){
-productId.value="";pName.value="";pPrice.value="";pCost.value="";pStock.value="";pDescription.value="";pImage.value="";
+ ["productId","pName","pPrice","pCost","pStock","pDescription","pImage"].forEach(id=>{
+ document.getElementById(id).value="";
+ });
 }
 function editProduct(id){
-let p=products.find(x=>String(x.id)===String(id));if(!p)return;
-productId.value=p.id;pName.value=p.name;pCategory.value=p.category||"Other";
-pPrice.value=p.price;pCost.value=p.cost_price||0;pStock.value=p.stock_quantity||0;pDescription.value=p.description||"";
-showTab("productsTab");window.scrollTo(0,0);
+ const p=products.find(x=>String(x.id)===String(id));
+ if(!p)return;
+ document.getElementById("productId").value=p.id;
+ document.getElementById("pName").value=p.name;
+ document.getElementById("pCategory").value=p.category||"Other";
+ document.getElementById("pPrice").value=p.price;
+ document.getElementById("pCost").value=p.cost_price||0;
+ document.getElementById("pStock").value=p.stock_quantity||0;
+ document.getElementById("pDescription").value=p.description||"";
+ showTab("productsTab");
+ window.scrollTo(0,0);
 }
 async function deleteProduct(id){
-if(!confirm("Delete this product?"))return;
-let {error}=await db.from("products").delete().eq("id",id);
-if(error){alert(error.message);return}await loadAll();
+ if(!confirm("Delete this product?"))return;
+ const {error}=await db.from("products").delete().eq("id",id);
+ if(error){alert(error.message);return;}
+ await loadAll();
 }
 function renderManage(){
-manageProducts.innerHTML=products.map(p=>`<p><b>${esc(p.name)}</b> — ${money(p.price)} — Stock: ${p.stock_quantity||0}
-<button onclick="editProduct('${p.id}')">Edit</button>
-<button class="red" onclick="deleteProduct('${p.id}')">Delete</button></p>`).join("");
-saleProduct.innerHTML=products.map(p=>`<option value="${esc(p.id)}">${esc(p.name)} (Stock: ${p.stock_quantity||0})</option>`).join("");
-purchaseProduct.innerHTML=products.map(p=>`<option value="${esc(p.id)}">${esc(p.name)}</option>`).join("");
-statProducts.textContent=products.length;
-statStock.textContent=products.reduce((a,p)=>a+Number(p.stock_quantity||0),0);
+ document.getElementById("manageProducts").innerHTML=products.map(p=>`
+ <div class="panel">
+ <b>${esc(p.name)}</b> — ${money(p.price)} — Stock: ${p.stock_quantity||0}
+ <button onclick="editProduct('${p.id}')">Edit</button>
+ <button class="red" onclick="deleteProduct('${p.id}')">Delete</button>
+ </div>`).join("")||"No products added.";
+ const options=products.map(p=>
+ `<option value="${esc(p.id)}">${esc(p.name)} (Stock: ${p.stock_quantity||0})</option>`
+ ).join("");
+ document.getElementById("saleProduct").innerHTML=options;
+ document.getElementById("purchaseProduct").innerHTML=options;
+ document.getElementById("statProducts").textContent=products.length;
+ document.getElementById("statStock").textContent=
+ products.reduce((a,p)=>a+Number(p.stock_quantity||0),0);
 }
 
 async function recordSale(){
-let p=products.find(x=>String(x.id)===saleProduct.value),qty=Number(saleQuantity.value);
-if(!p||qty<=0){alert("Select a product and valid quantity.");return}
-if(qty>Number(p.stock_quantity||0)){alert("Not enough stock. Please record a purchase first.");return}
-let total=qty*Number(p.price);
-let {data:s,error}=await db.from("sales").insert({sale_type:saleType.value,customer_name:customerName.value,payment_method:salePayment.value,total_amount:total}).select().single();
-if(error){alert(error.message);return}
-let {error:itemError}=await db.from("sale_items").insert({sale_id:s.id,product_name:p.name,quantity:qty,unit_price:p.price,unit_cost:p.cost_price||0});
-if(itemError){await db.from("sales").delete().eq("id",s.id);alert(itemError.message);return}
-let {error:stockError}=await db.from("products").update({stock_quantity:Number(p.stock_quantity)-qty,stock_status:Number(p.stock_quantity)-qty>0?"In Stock":"Out of Stock"}).eq("id",p.id);
-if(stockError){alert("Sale saved, but stock update failed: "+stockError.message)}
-else{makeReceipt(s,p,qty);alert("Sale recorded.");}
-await loadAll();
+ const p=products.find(x=>String(x.id)===document.getElementById("saleProduct").value);
+ const qty=Number(document.getElementById("saleQuantity").value);
+ if(!p||!Number.isFinite(qty)||qty<=0){alert("Select a product and valid quantity.");return;}
+ if(qty>Number(p.stock_quantity||0)){alert("Not enough stock. Please record a purchase first.");return;}
+ const total=qty*Number(p.price);
+ const {data:s,error}=await db.from("sales").insert({
+ sale_type:document.getElementById("saleType").value,
+ customer_name:document.getElementById("customerName").value,
+ payment_method:document.getElementById("salePayment").value,
+ total_amount:total
+ }).select().single();
+ if(error){alert(error.message);return;}
+ const {error:itemError}=await db.from("sale_items").insert({
+ sale_id:s.id,product_name:p.name,quantity:qty,
+ unit_price:p.price,unit_cost:p.cost_price||0
+ });
+ if(itemError){
+ await db.from("sales").delete().eq("id",s.id);
+ alert(itemError.message);return;
+ }
+ const newStock=Number(p.stock_quantity)-qty;
+ const {error:stockError}=await db.from("products").update({
+ stock_quantity:newStock,
+ stock_status:newStock>0?"In Stock":"Out of Stock"
+ }).eq("id",p.id);
+ if(stockError){
+ alert("Sale saved, but stock update failed: "+stockError.message);
+ }else{
+ makeReceipt(s,p,qty);
+ alert("Sale recorded.");
+ }
+ await loadAll();
 }
 
 async function recordPurchase(){
-let p=products.find(x=>String(x.id)===purchaseProduct.value),qty=Number(purchaseQuantity.value),cost=Number(purchaseCost.value);
-if(!p||qty<=0||cost<0){alert("Enter valid purchase details.");return}
-let total=qty*cost;
-let {data:purchase,error}=await db.from("purchases").insert({supplier_name:supplierName.value,invoice_number:invoiceNumber.value,total_amount:total,notes:purchaseNotes.value}).select().single();
-if(error){alert(error.message);return}
-let {error:itemError}=await db.from("purchase_items").insert({purchase_id:purchase.id,product_name:p.name,quantity:qty,unit_cost:cost});
-if(itemError){await db.from("purchases").delete().eq("id",purchase.id);alert(itemError.message);return}
-let oldQty=Number(p.stock_quantity||0),newQty=oldQty+qty;
-let newCost=newQty?((oldQty*Number(p.cost_price||0))+(qty*cost))/newQty:cost;
-let {error:stockError}=await db.from("products").update({stock_quantity:newQty,cost_price:newCost,stock_status:"In Stock"}).eq("id",p.id);
-if(stockError){alert("Purchase saved but stock update failed: "+stockError.message)}
-else alert("Purchase recorded and stock updated.");
-await loadAll();
+ const p=products.find(x=>String(x.id)===document.getElementById("purchaseProduct").value);
+ const qty=Number(document.getElementById("purchaseQuantity").value);
+ const cost=Number(document.getElementById("purchaseCost").value);
+ if(!p||!Number.isFinite(qty)||qty<=0||!Number.isFinite(cost)||cost<0){
+ alert("Enter valid purchase details.");return;
+ }
+ const total=qty*cost;
+ const {data:purchase,error}=await db.from("purchases").insert({
+ supplier_name:document.getElementById("supplierName").value,
+ invoice_number:document.getElementById("invoiceNumber").value,
+ total_amount:total,
+ notes:document.getElementById("purchaseNotes").value
+ }).select().single();
+ if(error){alert(error.message);return;}
+ const {error:itemError}=await db.from("purchase_items").insert({
+ purchase_id:purchase.id,product_name:p.name,quantity:qty,unit_cost:cost
+ });
+ if(itemError){
+ await db.from("purchases").delete().eq("id",purchase.id);
+ alert(itemError.message);return;
+ }
+ const oldQty=Number(p.stock_quantity||0);
+ const newQty=oldQty+qty;
+ const newCost=newQty?
+ ((oldQty*Number(p.cost_price||0))+(qty*cost))/newQty:cost;
+ const {error:stockError}=await db.from("products").update({
+ stock_quantity:newQty,cost_price:newCost,stock_status:"In Stock"
+ }).eq("id",p.id);
+ if(stockError){alert("Purchase saved but stock update failed: "+stockError.message);}
+ else alert("Purchase recorded and stock updated.");
+ await loadAll();
 }
 
 async function recordExpense(){
-let amount=Number(expenseAmount.value);
-if(!expenseName.value.trim()||amount<=0){alert("Enter expense name and amount.");return}
-let {error}=await db.from("expenses").insert({expense_name:expenseName.value,category:expenseCategory.value,amount,payment_method:expensePayment.value,notes:expenseNotes.value});
-if(error){alert(error.message);return}
-alert("Expense saved.");expenseName.value="";expenseAmount.value="";expenseNotes.value="";
-await loadAll();
+ const amount=Number(document.getElementById("expenseAmount").value);
+ const name=document.getElementById("expenseName").value.trim();
+ if(!name||!Number.isFinite(amount)||amount<=0){alert("Enter expense name and amount.");return;}
+ const {error}=await db.from("expenses").insert({
+ expense_name:name,
+ category:document.getElementById("expenseCategory").value,
+ amount,
+ payment_method:document.getElementById("expensePayment").value,
+ notes:document.getElementById("expenseNotes").value
+ });
+ if(error){alert(error.message);return;}
+ alert("Expense saved.");
+ document.getElementById("expenseName").value="";
+ document.getElementById("expenseAmount").value="";
+ document.getElementById("expenseNotes").value="";
+ await loadAll();
 }
 
 function makeReceipt(s,p,qty){
-let {jsPDF}=window.jspdf;let doc=new jsPDF();
-doc.setFontSize(18);doc.text("Jhammat & Khan Zarai Markaz",15,20);
-doc.setFontSize(11);doc.text("Wadhi, Tehsil Shahpur, District Sargodha",15,29);
-doc.text("WhatsApp: +92 346 8600616",15,36);
-doc.text("SALES RECEIPT",15,52);
-doc.text("Receipt: "+s.id,15,62);
-doc.text("Date: "+new Date(s.created_at).toLocaleString(),15,70);
-doc.text("Customer: "+(s.customer_name||"Walk-in customer"),15,78);
-doc.text("Product: "+p.name,15,91);
-doc.text("Quantity: "+qty,15,99);
-doc.text("Unit price: "+money(p.price),15,107);
-doc.text("TOTAL: "+money(s.total_amount),15,120);
-doc.save("receipt-"+s.id+".pdf");
+ const {jsPDF}=window.jspdf;
+ const doc=new jsPDF();
+ doc.setFontSize(18);
+ doc.text("Jhammat & Khan Zarai Markaz",15,20);
+ doc.setFontSize(11);
+ doc.text("Wadhi, Tehsil Shahpur, District Sargodha",15,29);
+ doc.text("WhatsApp: +92 346 8600616",15,36);
+ doc.text("SALES RECEIPT",15,52);
+ doc.text("Receipt: "+s.id,15,62);
+ doc.text("Date: "+new Date(s.created_at).toLocaleString(),15,70);
+ doc.text("Customer: "+(s.customer_name||"Walk-in customer"),15,78);
+ doc.text("Product: "+p.name,15,91);
+ doc.text("Quantity: "+qty,15,99);
+ doc.text("Unit price: "+money(p.price),15,107);
+ doc.text("TOTAL: "+money(s.total_amount),15,120);
+ doc.save("receipt-"+s.id+".pdf");
 }
 
 async function loadAll(){
-await loadProducts();renderManage();
-let [a,b,c,d,e]=await Promise.all([
-db.from("sales").select("*").order("created_at",{ascending:false}),
-db.from("sale_items").select("*"),
-db.from("purchases").select("*").order("created_at",{ascending:false}),
-db.from("purchase_items").select("*"),
-db.from("expenses").select("*").order("created_at",{ascending:false})
-]);
-if(a.error||b.error||c.error||d.error||e.error){alert("Some records could not load. Check your database permissions.");return}
-sales=a.data||[];saleItems=b.data||[];purchases=c.data||[];purchaseItems=d.data||[];expenses=e.data||[];
-statSales.textContent=money(sales.reduce((n,x)=>n+Number(x.total_amount||0),0));
-statExpenses.textContent=money(expenses.reduce((n,x)=>n+Number(x.amount||0),0));
-salesList.innerHTML=sales.slice(0,30).map(s=>`<p>${new Date(s.created_at).toLocaleDateString()} — ${esc(s.customer_name||"Customer")} — ${money(s.total_amount)} — ${esc(s.sale_type)}</p>`).join("")||"No sales yet.";
-purchasesList.innerHTML=purchases.slice(0,30).map(x=>`<p>${new Date(x.created_at).toLocaleDateString()} — ${esc(x.supplier_name||"Supplier")} — ${money(x.total_amount)}</p>`).join("")||"No purchases yet.";
-expensesList.innerHTML=expenses.slice(0,30).map(x=>`<p>${new Date(x.created_at).toLocaleDateString()} — ${esc(x.expense_name)} — ${money(x.amount)}</p>`).join("")||"No expenses yet.";
-loadReports();
+ await loadProducts();
+ renderManage();
+ const [a,b,c,d,e]=await Promise.all([
+ db.from("sales").select("*").order("created_at",{ascending:false}),
+ db.from("sale_items").select("*"),
+ db.from("purchases").select("*").order("created_at",{ascending:false}),
+ db.from("purchase_items").select("*"),
+ db.from("expenses").select("*").order("created_at",{ascending:false})
+ ]);
+ if(a.error||b.error||c.error||d.error||e.error){
+ alert("Some records could not load. Check database permissions.");
+ return;
+ }
+ sales=a.data||[];
+ saleItems=b.data||[];
+ purchases=c.data||[];
+ purchaseItems=d.data||[];
+ expenses=e.data||[];
+ document.getElementById("statSales").textContent=
+ money(sales.reduce((n,x)=>n+Number(x.total_amount||0),0));
+ document.getElementById("statExpenses").textContent=
+ money(expenses.reduce((n,x)=>n+Number(x.amount||0),0));
+ document.getElementById("salesList").innerHTML=sales.slice(0,30).map(s=>
+ `<p>${new Date(s.created_at).toLocaleDateString()} — ${esc(s.customer_name||"Customer")} — ${money(s.total_amount)} — ${esc(s.sale_type)}</p>`
+ ).join("")||"No sales yet.";
+ document.getElementById("purchasesList").innerHTML=purchases.slice(0,30).map(x=>
+ `<p>${new Date(x.created_at).toLocaleDateString()} — ${esc(x.supplier_name||"Supplier")} — ${money(x.total_amount)}</p>`
+ ).join("")||"No purchases yet.";
+ document.getElementById("expensesList").innerHTML=expenses.slice(0,30).map(x=>
+ `<p>${new Date(x.created_at).toLocaleDateString()} — ${esc(x.expense_name)} — ${money(x.amount)}</p>`
+ ).join("")||"No expenses yet.";
+ loadReports();
 }
 
 function periodStart(period){
-let d=new Date();d.setHours(0,0,0,0);
-if(period==="today")return d;
-if(period==="week"){d.setDate(d.getDate()-((d.getDay()+6)%7));return d}
-if(period==="month"){d.setDate(1);return d}
-if(period==="year"){d.setMonth(0,1);return d}
-return new Date(0);
+ const d=new Date();
+ d.setHours(0,0,0,0);
+ if(period==="today")return d;
+ if(period==="week"){
+ d.setDate(d.getDate()-((d.getDay()+6)%7));return d;
+ }
+ if(period==="month"){d.setDate(1);return d;}
+ if(period==="year"){d.setMonth(0,1);return d;}
+ return new Date(0);
 }
 function loadReports(){
-let period=reportPeriod.value,start=periodStart(period);
-let ss=sales.filter(x=>new Date(x.created_at)>=start);
-let ee=expenses.filter(x=>new Date(x.created_at)>=start);
-let items=saleItems.filter(i=>ss.some(s=>s.id===i.sale_id));
-let revenue=ss.reduce((n,x)=>n+Number(x.total_amount||0),0);
-let gross=items.reduce((n,x)=>n+(Number(x.unit_price)-Number(x.unit_cost||0))*Number(x.quantity),0);
-let ex=ee.reduce((n,x)=>n+Number(x.amount||0),0);
-reportSummary.innerHTML=`
-<div class="grid">
-<div class="stat">Sales<strong>${money(revenue)}</strong></div>
-<div class="stat">Gross profit<strong>${money(gross)}</strong></div>
-<div class="stat">Expenses<strong>${money(ex)}</strong></div>
-<div class="stat">Net profit<strong>${money(gross-ex)}</strong></div>
-</div><p>Sales transactions: ${ss.length}</p>`;
+ const period=document.getElementById("reportPeriod").value;
+ const start=periodStart(period);
+ const ss=sales.filter(x=>new Date(x.created_at)>=start);
+ const ee=expenses.filter(x=>new Date(x.created_at)>=start);
+ const items=saleItems.filter(i=>ss.some(s=>s.id===i.sale_id));
+ const revenue=ss.reduce((n,x)=>n+Number(x.total_amount||0),0);
+ const gross=items.reduce((n,x)=>n+
+ (Number(x.unit_price)-Number(x.unit_cost||0))*Number(x.quantity),0);
+ const ex=ee.reduce((n,x)=>n+Number(x.amount||0),0);
+ document.getElementById("reportSummary").innerHTML=`
+ <div class="grid">
+ <div class="stat">Sales<strong>${money(revenue)}</strong></div>
+ <div class="stat">Gross profit<strong>${money(gross)}</strong></div>
+ <div class="stat">Expenses<strong>${money(ex)}</strong></div>
+ <div class="stat">Net profit<strong>${money(gross-ex)}</strong></div>
+ </div><p>Sales transactions: ${ss.length}</p>`;
 }
 function exportExcel(){
-let wb=XLSX.utils.book_new();
-function sheet(name,data){XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(data),name)}
-sheet("Sales",sales);sheet("Sale Items",saleItems);sheet("Purchases",purchases);
-sheet("Purchase Items",purchaseItems);sheet("Expenses",expenses);
-XLSX.writeFile(wb,"Jhammat-Khan-Business-Report.xlsx");
+ const wb=XLSX.utils.book_new();
+ function sheet(name,data){
+ XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(data),name);
+ }
+ sheet("Sales",sales);
+ sheet("Sale Items",saleItems);
+ sheet("Purchases",purchases);
+ sheet("Purchase Items",purchaseItems);
+ sheet("Expenses",expenses);
+ XLSX.writeFile(wb,"Jhammat-Khan-Business-Report.xlsx");
 }
 function exportStock(){
-let wb=XLSX.utils.book_new();
-XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(products.map(p=>({Product:p.name,Category:p.category,Price:p.price,Cost:p.cost_price,Stock:p.stock_quantity}))),"Stock");
-XLSX.writeFile(wb,"Shop-Stock.xlsx");
+ const wb=XLSX.utils.book_new();
+ XLSX.utils.book_append_sheet(wb,
+ XLSX.utils.json_to_sheet(products.map(p=>({
+ Product:p.name,Category:p.category,Price:p.price,
+ Cost:p.cost_price,Stock:p.stock_quantity
+ }))),"Stock");
+ XLSX.writeFile(wb,"Shop-Stock.xlsx");
 }
+
 async function loadTraffic(){
-let {data,error}=await db.from("site_visits").select("visited_at");
-if(error){traffic.textContent="Traffic data unavailable.";return}
-let today=new Date().toISOString().slice(0,10);
-traffic.textContent="Total page visits: "+data.length+" | Today: "+data.filter(x=>x.visited_at.slice(0,10)===today).length;
+ const {data,error}=await db.from("site_visits").select("visited_at");
+ if(error){
+ document.getElementById("traffic").textContent="Traffic data unavailable.";
+ return;
+ }
+ const today=new Date().toISOString().slice(0,10);
+ document.getElementById("traffic").textContent=
+ "Total page visits: "+data.length+" | Today: "+
+ data.filter(x=>x.visited_at.slice(0,10)===today).length;
 }
 async function recordVisit(){
-await db.from("site_visits").insert({page:location.pathname});
+ const {error}=await db.from("site_visits").insert({page:location.pathname});
+ if(error)console.warn("Visit tracking:",error.message);
 }
 
 /* REAL-TIME VIEWERS */
 let visitorSessionId=localStorage.getItem("jk_visitor_session");
 if(!visitorSessionId){
-visitorSessionId=(crypto.randomUUID?crypto.randomUUID():"v-"+Date.now()+"-"+Math.random().toString(36).slice(2));
-localStorage.setItem("jk_visitor_session",visitorSessionId);
+ visitorSessionId=(crypto.randomUUID?
+ crypto.randomUUID():"v-"+Date.now()+"-"+Math.random().toString(36).slice(2));
+ localStorage.setItem("jk_visitor_session",visitorSessionId);
 }
 async function sendVisitorHeartbeat(){
-const {error}=await db.rpc("record_visitor_heartbeat",{
-p_session_id:visitorSessionId,
-p_page:location.pathname
-});
-if(error)console.error("Visitor heartbeat:",error.message);
+ const {error}=await db.rpc("record_visitor_heartbeat",{
+ p_session_id:visitorSessionId,
+ p_page:location.pathname
+ });
+ if(error)console.error("Visitor heartbeat:",error.message);
 }
 async function loadViewers(){
-const status=document.getElementById("viewerStatus");
-const count=document.getElementById("activeCount");
-status.textContent="Loading viewers...";
-const cutoff=new Date(Date.now()-120000).toISOString();
-const {data,error}=await db.from("active_visitors")
-.select("session_id,last_seen,page").gte("last_seen",cutoff);
-if(error){status.textContent="Could not load viewers: "+error.message;return}
-count.textContent=(data||[]).length;
-status.textContent="Active browser sessions in the last 2 minutes. Updated "+new Date().toLocaleTimeString();
+ const status=document.getElementById("viewerStatus");
+ const count=document.getElementById("activeCount");
+ status.textContent="Loading viewers...";
+ const cutoff=new Date(Date.now()-120000).toISOString();
+ const {data,error}=await db.from("active_visitors")
+ .select("session_id,last_seen,page").gte("last_seen",cutoff);
+ if(error){
+ status.textContent="Could not load viewers: "+error.message;
+ return;
+ }
+ count.textContent=(data||[]).length;
+ status.textContent="Active browser sessions in the last 2 minutes. Updated "+new Date().toLocaleTimeString();
 }
 
 async function start(){
-await recordVisit();
-await sendVisitorHeartbeat();
-setInterval(sendVisitorHeartbeat,30000);
-await loadProducts();
-let {data}=await db.auth.getSession();
-if(data.session&&data.session.user.id===OWNER_ID)await openAdmin();
+ await recordVisit();
+ await sendVisitorHeartbeat();
+ setInterval(sendVisitorHeartbeat,30000);
+ await loadProducts();
+ const {data}=await db.auth.getSession();
+ if(data.session&&data.session.user.id===OWNER_ID)await openAdmin();
 }
 start();
 </script>
