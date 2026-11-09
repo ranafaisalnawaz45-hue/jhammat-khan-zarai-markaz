@@ -1,80 +1,240 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#14532d">
 <title>Jhammat & Khan Zarai Markaz</title>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f4f8f2;color:#183c27}
-header{background:#176b37;color:white;padding:22px 15px;text-align:center}
-header h1{margin:0;font-size:25px}
-nav{background:#104d29;padding:12px;text-align:center}
-nav a{color:white;margin:8px;text-decoration:none;font-weight:bold}
-main{max-width:1100px;margin:auto;padding:18px}
-section,.panel{background:white;padding:18px;margin:15px 0;border-radius:12px;box-shadow:0 2px 9px #0001}
-h2{color:#176b37}
-button{background:#176b37;color:white;border:0;border-radius:7px;padding:11px 15px;margin:4px;cursor:pointer}
-button.red{background:#b83232}
-input,select,textarea{width:100%;padding:11px;margin:6px 0 12px;border:1px solid #ccc;border-radius:6px}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f8f1;color:#203b2a}
+button,a{cursor:pointer}
+button{background:#176b37;color:white;border:0;border-radius:9px;padding:12px 18px;font-weight:bold}
+button:hover{background:#104d29;transform:translateY(-1px)}
+input,select,textarea{width:100%;padding:12px;margin:6px 0 12px;border:1px solid #d4dfd4;border-radius:8px;font-size:15px}
 label{font-weight:bold}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
-.product img{width:100%;height:150px;object-fit:contain;background:#f5f5f5}
-.product{border:1px solid #ddd;border-radius:10px;padding:12px}
-.price{font-size:20px;font-weight:bold;color:#176b37}
+header{background:#14532d;color:white;padding:15px 5%;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-icon{font-size:37px}
+.brand h1{font-size:21px;margin:0}
+.brand p{font-size:12px;margin:5px 0 0;color:#d5edda}
+nav{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+nav a{color:white;text-decoration:none;font-weight:bold;font-size:14px}
+nav a:hover{color:#c7ef9b}
+.hero{
+min-height:430px;
+display:flex;align-items:center;
+padding:55px 7%;
+color:white;
+background:linear-gradient(90deg,rgba(9,48,25,.91),rgba(9,48,25,.52),rgba(9,48,25,.12)),
+url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1800") center/cover;
+}
+.hero-content{max-width:650px}
+.hero-tag{display:inline-block;background:#d4f0b1;color:#14532d;padding:9px 15px;border-radius:30px;font-size:13px;font-weight:bold}
+.hero h2{font-size:clamp(34px,6vw,58px);line-height:1.1;margin:20px 0;color:white}
+.hero p{font-size:17px;line-height:1.7;max-width:550px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
+.btn-light{background:#fff;color:#14532d}
+.btn-outline{background:transparent;border:2px solid white}
+main{max-width:1200px;margin:auto;padding:20px}
+section{margin:35px 0}
+.section-heading{text-align:center;margin-bottom:25px}
+.section-heading h2{font-size:30px;color:#176b37;margin-bottom:8px}
+.section-heading p{color:#65796a}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px;margin-top:-25px;position:relative}
+.feature{background:white;padding:20px;border-radius:14px;box-shadow:0 5px 20px #1231;text-align:center}
+.feature span{font-size:32px}
+.feature h3{margin:10px 0 5px;color:#176b37}
+.feature p{font-size:13px;color:#718074;margin:0}
+.categories{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.category-card{height:220px;border-radius:15px;overflow:hidden;position:relative;background:#1c5130;color:white;box-shadow:0 5px 15px #0002}
+.category-card img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.category-card:hover img{transform:scale(1.08)}
+.category-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.8),transparent 75%);display:flex;flex-direction:column;justify-content:flex-end;padding:18px}
+.category-overlay h3{margin:0;font-size:21px}
+.category-overlay p{margin:6px 0 0;font-size:13px}
+.products-section{background:white;padding:25px;border-radius:18px;box-shadow:0 4px 18px #0001}
+.product-tools{max-width:500px;margin:0 auto 22px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px}
+.product{border:1px solid #e3e9e1;border-radius:14px;padding:12px;background:white;overflow:hidden;transition:.2s}
+.product:hover{box-shadow:0 8px 22px #0002;transform:translateY(-3px)}
+.product img{width:100%;height:175px;object-fit:cover;background:#f2f6ef;border-radius:10px}
+.product-placeholder{height:175px;background:linear-gradient(135deg,#e4f3dc,#f4f8ed);display:flex;align-items:center;justify-content:center;font-size:65px;border-radius:10px}
+.product h3{margin:13px 0 5px;color:#204a2d}
+.product p{font-size:13px;color:#69786b}
+.price{font-size:20px;font-weight:bold;color:#176b37!important}
+.product button{width:100%;margin:5px 0 0}
+.about-strip{background:#e5f2df;border-radius:18px;padding:30px;display:grid;grid-template-columns:1fr 1fr;gap:25px;align-items:center}
+.about-strip img{width:100%;height:260px;object-fit:cover;border-radius:14px}
+.about-strip h2{color:#176b37}
+.about-strip p{line-height:1.8;color:#526b57}
+.contact-card{background:#14532d;color:white;padding:30px;border-radius:18px;text-align:center}
+.contact-card h2{color:white}
+.contact-card p{line-height:1.8}
+.contact-card a{color:white}
+footer{background:#103d24;color:white;padding:28px 15px;text-align:center;margin-top:40px}
+footer p{margin:8px}
+.small{font-size:13px;color:#777}
+.hidden{display:none!important}
+.panel{background:white;padding:18px;margin:15px 0;border-radius:12px;box-shadow:0 2px 9px #0001}
+.tabs{display:flex;flex-wrap:wrap;gap:5px;margin:15px 0}
+.tabs button{flex:1;min-width:105px}
+.stat{background:#e6f2e8;padding:15px;border-radius:9px}
+.stat strong{font-size:22px;display:block;margin-top:5px}
+.admin-title{color:#176b37}
 table{width:100%;border-collapse:collapse;margin-top:12px;font-size:14px}
 th,td{border:1px solid #ddd;padding:9px;text-align:left}
 th{background:#e6f2e8}
-.hidden{display:none!important}
-.tabs{display:flex;flex-wrap:wrap;gap:4px}
-.tabs button{flex:1}
-.stat{background:#e6f2e8;padding:15px;border-radius:8px}
-.stat strong{font-size:22px;display:block}
-footer{text-align:center;padding:25px;background:#104d29;color:white}
-.small{font-size:13px;color:#666}
+.red{background:#b83232}
+@media(max-width:650px){
+header{justify-content:center;text-align:center}
+nav{justify-content:center;gap:13px}
+.hero{min-height:390px;padding:40px 7%}
+.hero h2{font-size:37px}
+.about-strip{grid-template-columns:1fr}
+.features{margin-top:15px}
+.products-section{padding:14px}
+}
 </style>
 </head>
+
 <body>
 
 <header>
-<h1>🌿 Jhammat & Khan Zarai Markaz</h1>
-<p>Quality Agricultural Products & Farmer Support</p>
-<p>Wadhi near PSO Pump, Tehsil Shahpur, District Sargodha</p>
-</header>
-
+<div class="brand">
+<div class="brand-icon">🌿</div>
+<div>
+<h1>Jhammat & Khan Zarai Markaz</h1>
+<p>Growing Together, Growing Better</p>
+</div>
+</div>
 <nav>
 <a href="#home">Home</a>
+<a href="#categories">Categories</a>
 <a href="#products">Products</a>
+<a href="#about">About</a>
 <a href="#contact">Contact</a>
 </nav>
+</header>
 
-<main>
-<section id="home">
-<h2>Welcome to Jhammat & Khan Zarai Markaz</h2>
-<p>Your trusted agricultural products store in Wadhi, Shahpur, Sargodha.</p>
-<a href="#products"><button>View Products</button></a>
-<a href="https://wa.me/923468600616"><button>WhatsApp Us</button></a>
+<section class="hero" id="home">
+<div class="hero-content">
+<span class="hero-tag">🌱 YOUR TRUSTED AGRICULTURAL PARTNER</span>
+<h2>Better Farming Starts Here</h2>
+<p>Quality agricultural products and farmer support for a healthier, more productive harvest.</p>
+<div class="hero-actions">
+<a href="#products"><button>Explore Products →</button></a>
+<a href="https://wa.me/923468600616"><button class="btn-light">WhatsApp Us</button></a>
+</div>
+</div>
 </section>
 
-<section id="products">
+<main>
+
+<div class="features">
+<div class="feature">
+<span>🌾</span>
+<h3>Quality Products</h3>
+<p>Products for agricultural needs</p>
+</div>
+<div class="feature">
+<span>🌱</span>
+<h3>Farmer Support</h3>
+<p>Helping farmers grow better</p>
+</div>
+<div class="feature">
+<span>🤝</span>
+<h3>Trusted Service</h3>
+<p>Local service you can contact</p>
+</div>
+<div class="feature">
+<span>📍</span>
+<h3>Local Store</h3>
+<p>Serving Wadhi and nearby areas</p>
+</div>
+</div>
+
+<section id="categories">
+<div class="section-heading">
+<h2>Explore Our Categories</h2>
+<p>Explore agricultural product categories</p>
+</div>
+
+<div class="categories">
+<div class="category-card">
+<img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=700" alt="Agricultural crops">
+<div class="category-overlay">
+<h3>🌾 Fertilisers</h3>
+<p>Supporting healthy crop growth</p>
+</div>
+</div>
+
+<div class="category-card">
+<img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=700" alt="Green farmland">
+<div class="category-overlay">
+<h3>🌱 Seeds</h3>
+<p>Start your next growing season</p>
+</div>
+</div>
+
+<div class="category-card">
+<img src="https://images.unsplash.com/photo-1499529112087-3cb3b73cec95?w=700" alt="Farm crops">
+<div class="category-overlay">
+<h3>🛡️ Crop Protection</h3>
+<p>Explore crop-care products</p>
+</div>
+</div>
+
+<div class="category-card">
+<img src="https://images.unsplash.com/photo-1592982537447-6f2a6a0a2f6a?w=700" alt="Agricultural field">
+<div class="category-overlay">
+<h3>🚜 Farm Supplies</h3>
+<p>Useful agricultural essentials</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="products" class="products-section">
+<div class="section-heading">
 <h2>Our Products</h2>
-<input id="search" placeholder="Search products..." oninput="renderProducts()">
+<p>Browse our available agricultural products</p>
+</div>
+<div class="product-tools">
+<input id="search" placeholder="🔍 Search products..." oninput="renderProducts()">
+</div>
 <div id="productList" class="grid">Loading products...</div>
 </section>
 
+<section id="about">
+<div class="about-strip">
+<div>
+<h2>Growing With Our Farmers 🌿</h2>
+<p>Jhammat & Khan Zarai Markaz is based in Wadhi, Shahpur, Sargodha. We aim to support local farmers by providing access to agricultural products and a convenient way to contact our store.</p>
+<p>Contact us to ask about product availability and prices.</p>
+<a href="https://wa.me/923468600616"><button>Talk to Our Team</button></a>
+</div>
+<img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=900" alt="Agricultural landscape">
+</div>
+</section>
+
 <section id="contact">
-<h2>Contact Us</h2>
-<p>📍 Wadhi near PSO Pump, Tehsil Shahpur, District Sargodha</p>
+<div class="contact-card">
+<h2>Visit or Contact Us</h2>
+<p>📍 Wadhi near PSO Pump, Tehsil Shahpur, District Sargodha, Punjab, Pakistan</p>
 <p>📞 +92 346 8600616</p>
-<a href="https://wa.me/923468600616"><button>Contact on WhatsApp</button></a>
+<a href="https://wa.me/923468600616"><button class="btn-light">Message Us on WhatsApp</button></a>
+</div>
 </section>
 
 <section>
-<h2>Owner Login</h2>
+<h2 class="admin-title">🔐 Owner Login</h2>
 <div id="loginBox">
 <input id="email" type="email" placeholder="Owner email">
 <input id="password" type="password" placeholder="Password">
@@ -83,7 +243,7 @@ footer{text-align:center;padding:25px;background:#104d29;color:white}
 </div>
 
 <div id="admin" class="hidden">
-<h2>Shop Management Dashboard</h2>
+<h2 class="admin-title">Shop Management Dashboard</h2>
 <button onclick="logout()">Logout</button>
 
 <div class="grid">
@@ -99,7 +259,7 @@ footer{text-align:center;padding:25px;background:#104d29;color:white}
 <button onclick="showTab('purchasesTab')">Purchases</button>
 <button onclick="showTab('expensesTab')">Expenses</button>
 <button onclick="showTab('reportsTab')">Reports</button>
-<button onclick="showTab('viewersTab');loadViewers()">Real-Time Viewers</button>
+<button onclick="showTab('viewersTab')">Real-Time Viewers</button>
 </div>
 
 <div id="productsTab" class="panel">
@@ -174,23 +334,22 @@ footer{text-align:center;padding:25px;background:#104d29;color:white}
 </div>
 
 <div id="viewersTab" class="panel hidden">
-<h2>Real-Time Website Viewers</h2>
-<div class="stat">
-<strong id="activeCount">0</strong>
-People viewing your website now
-</div>
+<h2>👁 Real-Time Website Viewers</h2>
+<div class="stat"><strong id="activeCount">0</strong>People viewing your website now</div>
 <p id="viewerStatus">Waiting for visitor data...</p>
 <button onclick="loadViewers()">Refresh Viewers</button>
 <p class="small">Counts browser sessions active within the last 2 minutes.</p>
 </div>
-
 </div>
 </section>
 </main>
 
 <footer>
-<p>Jhammat & Khan Zarai Markaz</p>
+<h3>🌿 Jhammat & Khan Zarai Markaz</h3>
+<p>Quality Agricultural Products & Farmer Support</p>
+<p>Wadhi, Tehsil Shahpur, District Sargodha</p>
 <p>WhatsApp: +92 346 8600616</p>
+<p>© Jhammat & Khan Zarai Markaz</p>
 </footer>
 
 <script>
@@ -202,12 +361,14 @@ let products=[],sales=[],saleItems=[],purchases=[],purchaseItems=[],expenses=[];
 
 function money(n){return "PKR "+Number(n||0).toLocaleString("en-PK",{maximumFractionDigits:2})}
 function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+
 function showTab(id){
 document.querySelectorAll("#admin .panel").forEach(x=>x.classList.add("hidden"));
 document.getElementById(id).classList.remove("hidden");
 if(id==="viewersTab")loadViewers();
 if(id==="reportsTab")loadTraffic();
 }
+
 async function login(){
 let {data,error}=await db.auth.signInWithPassword({email:email.value,password:password.value});
 if(error){loginMessage.textContent=error.message;return}
@@ -219,23 +380,36 @@ async function openAdmin(){
 loginBox.classList.add("hidden");admin.classList.remove("hidden");
 await loadAll();
 }
+
 async function loadProducts(){
 let {data,error}=await db.from("products").select("*").order("name");
 if(error){productList.textContent=error.message;return}
 products=data||[];renderProducts();
 }
+
+function productEmoji(category){
+let c=(category||"").toLowerCase();
+if(c.includes("seed"))return "🌱";
+if(c.includes("fertil"))return "🌾";
+if(c.includes("pest")||c.includes("insect"))return "🛡️";
+if(c.includes("herbi"))return "🌿";
+return "🚜";
+}
+
 function renderProducts(){
 let q=(search.value||"").toLowerCase();
 let list=products.filter(p=>(p.name||"").toLowerCase().includes(q)||(p.category||"").toLowerCase().includes(q));
 productList.innerHTML=list.length?list.map(p=>`
 <div class="product">
-${p.image_url?`<img src="${esc(p.image_url)}" alt="">`:""}
-<h3>${esc(p.name)}</h3><p>${esc(p.category||"")}</p>
+${p.image_url?`<img src="${esc(p.image_url)}" alt="${esc(p.name)}">`:`<div class="product-placeholder">${productEmoji(p.category)}</div>`}
+<h3>${esc(p.name)}</h3>
+<p>${esc(p.category||"Agricultural product")}</p>
 <p>${esc(p.description||"")}</p>
 <p class="price">${money(p.price)}</p>
 <a href="https://wa.me/923468600616?text=${encodeURIComponent("I am interested in "+p.name)}"><button>Order on WhatsApp</button></a>
 </div>`).join(""):"No products available yet.";
 }
+
 async function saveProduct(){
 let id=productId.value;
 let name=pName.value.trim(),price=Number(pPrice.value),cost=Number(pCost.value),stock=Number(pStock.value);
@@ -277,6 +451,7 @@ purchaseProduct.innerHTML=products.map(p=>`<option value="${esc(p.id)}">${esc(p.
 statProducts.textContent=products.length;
 statStock.textContent=products.reduce((a,p)=>a+Number(p.stock_quantity||0),0);
 }
+
 async function recordSale(){
 let p=products.find(x=>String(x.id)===saleProduct.value),qty=Number(saleQuantity.value);
 if(!p||qty<=0){alert("Select a product and valid quantity.");return}
@@ -291,6 +466,7 @@ if(stockError){alert("Sale saved, but stock update failed: "+stockError.message)
 else{makeReceipt(s,p,qty);alert("Sale recorded.");}
 await loadAll();
 }
+
 async function recordPurchase(){
 let p=products.find(x=>String(x.id)===purchaseProduct.value),qty=Number(purchaseQuantity.value),cost=Number(purchaseCost.value);
 if(!p||qty<=0||cost<0){alert("Enter valid purchase details.");return}
@@ -306,6 +482,7 @@ if(stockError){alert("Purchase saved but stock update failed: "+stockError.messa
 else alert("Purchase recorded and stock updated.");
 await loadAll();
 }
+
 async function recordExpense(){
 let amount=Number(expenseAmount.value);
 if(!expenseName.value.trim()||amount<=0){alert("Enter expense name and amount.");return}
@@ -314,6 +491,7 @@ if(error){alert(error.message);return}
 alert("Expense saved.");expenseName.value="";expenseAmount.value="";expenseNotes.value="";
 await loadAll();
 }
+
 function makeReceipt(s,p,qty){
 let {jsPDF}=window.jspdf;let doc=new jsPDF();
 doc.setFontSize(18);doc.text("Jhammat & Khan Zarai Markaz",15,20);
@@ -329,6 +507,7 @@ doc.text("Unit price: "+money(p.price),15,107);
 doc.text("TOTAL: "+money(s.total_amount),15,120);
 doc.save("receipt-"+s.id+".pdf");
 }
+
 async function loadAll(){
 await loadProducts();renderManage();
 let [a,b,c,d,e]=await Promise.all([
@@ -347,6 +526,7 @@ purchasesList.innerHTML=purchases.slice(0,30).map(x=>`<p>${new Date(x.created_at
 expensesList.innerHTML=expenses.slice(0,30).map(x=>`<p>${new Date(x.created_at).toLocaleDateString()} — ${esc(x.expense_name)} — ${money(x.amount)}</p>`).join("")||"No expenses yet.";
 loadReports();
 }
+
 function periodStart(period){
 let d=new Date();d.setHours(0,0,0,0);
 if(period==="today")return d;
@@ -393,37 +573,27 @@ async function recordVisit(){
 await db.from("site_visits").insert({page:location.pathname});
 }
 
-/* REAL-TIME VIEWER TRACKING */
+/* REAL-TIME VIEWERS */
 let visitorSessionId=localStorage.getItem("jk_visitor_session");
 if(!visitorSessionId){
 visitorSessionId=(crypto.randomUUID?crypto.randomUUID():"v-"+Date.now()+"-"+Math.random().toString(36).slice(2));
 localStorage.setItem("jk_visitor_session",visitorSessionId);
 }
-
 async function sendVisitorHeartbeat(){
 const {error}=await db.rpc("record_visitor_heartbeat",{
 p_session_id:visitorSessionId,
 p_page:location.pathname
 });
-if(error)console.error("Visitor heartbeat error:",error.message);
+if(error)console.error("Visitor heartbeat:",error.message);
 }
-
 async function loadViewers(){
 const status=document.getElementById("viewerStatus");
 const count=document.getElementById("activeCount");
 status.textContent="Loading viewers...";
 const cutoff=new Date(Date.now()-120000).toISOString();
-
-const {data,error}=await db
-.from("active_visitors")
-.select("session_id,last_seen,page")
-.gte("last_seen",cutoff);
-
-if(error){
-status.textContent="Could not load viewers: "+error.message;
-return;
-}
-
+const {data,error}=await db.from("active_visitors")
+.select("session_id,last_seen,page").gte("last_seen",cutoff);
+if(error){status.textContent="Could not load viewers: "+error.message;return}
 count.textContent=(data||[]).length;
 status.textContent="Active browser sessions in the last 2 minutes. Updated "+new Date().toLocaleTimeString();
 }
