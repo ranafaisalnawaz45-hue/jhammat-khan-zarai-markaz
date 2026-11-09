@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Jhammat and Khan Zarai Markaz, Wadhi near PSO Pump, Tehsil Shahpur, District Sargodha. Agricultural products and farmer support.">
+<title>Jhammat and Khan Zarai Markaz</title>
+<style>
+:root{--green:#176b3a;--dark:#103d27;--gold:#f0bd43;--cream:#f7f8f2;--ink:#1d2b22}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:var(--cream);line-height:1.5}
+header{background:linear-gradient(120deg,#0d4729,#21834a);color:white;padding:22px 5% 34px}
+.top{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:12px}.logo{width:52px;height:52px;border-radius:14px;background:#fff;color:var(--green);display:grid;place-items:center;font-size:27px;font-weight:bold}
+h1{font-size:clamp(22px,4vw,34px);margin:0}.tag{margin:3px 0 0;color:#e4f4e9;font-size:14px}
+nav a{color:white;text-decoration:none;margin-left:18px;font-weight:bold;font-size:14px}
+.hero{max-width:1100px;margin:38px auto 0}.hero h2{font-size:clamp(28px,5vw,46px);line-height:1.1;margin:0 0 12px;max-width:700px}.hero p{max-width:620px;color:#e8f5eb;margin:0 0 22px}
+.btn{display:inline-block;background:var(--gold);color:#2b291e;text-decoration:none;padding:12px 18px;border-radius:9px;font-weight:bold}
+main{max-width:1100px;margin:32px auto;padding:0 5%}.intro{text-align:center;margin:0 auto 26px;max-width:700px}.intro h2{color:var(--dark);font-size:28px;margin-bottom:6px}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}.tools input,.tools select{padding:12px;border:1px solid #d7dfd5;border-radius:9px;background:white;font-size:15px;flex:1;min-width:170px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}.card{background:white;border:1px solid #e5e9e2;border-radius:14px;overflow:hidden;box-shadow:0 4px 14px #173d2410}
+.product-icon{height:130px;background:#e8f2e8;display:grid;place-items:center;font-size:54px}.card-body{padding:16px}.category{font-size:12px;color:var(--green);font-weight:bold;text-transform:uppercase;letter-spacing:.5px}.card h3{margin:6px 0;font-size:18px}.price{font-weight:bold;color:var(--dark);margin:8px 0 13px}.smallbtn{display:block;text-align:center;background:var(--green);color:white;text-decoration:none;padding:10px;border-radius:8px;font-weight:bold}
+.note{background:#fff8e5;border:1px solid #f2dfa9;padding:14px;border-radius:10px;margin:20px 0;font-size:14px}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:28px 0}.info article{background:white;border-radius:12px;padding:18px;border:1px solid #e5e9e2}.info h3{margin:0 0 6px;color:var(--dark)}
+footer{background:#103d27;color:white;padding:26px 5%;text-align:center}footer p{margin:6px}
+@media(max-width:650px){.top{align-items:flex-start;flex-direction:column}nav a{margin:0 14px 0 0}.hero{margin-top:28px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <div class="brand"><div class="logo">🌱</div><div><h1>Jhammat and Khan Zarai Markaz</h1><p class="tag">Supporting farmers with the products they need</p></div></div>
+    <nav><a href="#products">Products</a><a href="#contact">Contact</a></nav>
+  </div>
+  <section class="hero">
+    <h2>Your local agricultural products centre</h2>
+    <p>Visit Jhammat and Khan Zarai Markaz for agricultural products and enquiries. Contact us on WhatsApp to ask about availability and current prices.</p>
+    <a class="btn" href="https://wa.me/923468600616" target="_blank" rel="noopener">Contact us on WhatsApp</a>
+  </section>
+</header>
+<main>
+  <section class="intro" id="products"><h2>Our Products</h2><p>Browse our product categories. For current stock and prices, please contact the store.</p></section>
+  <div class="tools">
+    <input id="search" type="search" placeholder="Search products..." aria-label="Search products">
+    <select id="category" aria-label="Filter by category"><option value="all">All categories</option><option>Fertilizers</option><option>Seeds</option><option>Crop Protection</option><option>Agricultural Equipment</option></select>
+  </div>
+  <div class="grid" id="productGrid">
+    <article class="card" data-name="Fertilizers" data-category="Fertilizers"><div class="product-icon">🌾</div><div class="card-body"><span class="category">Fertilizers</span><h3>Fertilizers</h3><p>Ask us about available fertilizer products.</p><div class="price">Price on enquiry</div><a class="smallbtn" href="https://wa.me/923468600616?text=Assalam-o-Alaikum%2C%20please%20share%20fertilizer%20availability%20and%20prices." target="_blank" rel="noopener">Ask on WhatsApp</a></div></article>
+    <article class="card" data-name="Seeds" data-category="Seeds"><div class="product-icon">🌱</div><div class="card-body"><span class="category">Seeds</span><h3>Seeds</h3><p>Ask us about seed varieties and availability.</p><div class="price">Price on enquiry</div><a class="smallbtn" href="https://wa.me/923468600616?text=Assalam-o-Alaikum%2C%20please%20share%20seed%20availability%20and%20prices." target="_blank" rel="noopener">Ask on WhatsApp</a></div></article>
+    <article class="card" data-name="Crop Protection" data-category="Crop Protection"><div class="product-icon">🛡️</div><div class="card-body"><span class="category">Crop Protection</span><h3>Crop Protection</h3><p>Ask us about crop protection products.</p><div class="price">Price on enquiry</div><a class="smallbtn" href="https://wa.me/923468600616?text=Assalam-o-Alaikum%2C%20please%20share%20crop%20protection%20product%20availability%20and%20prices." target="_blank" rel="noopener">Ask on WhatsApp</a></div></article>
+    <article class="card" data-name="Agricultural Equipment" data-category="Agricultural Equipment"><div class="product-icon">🚜</div><div class="card-body"><span class="category">Agricultural Equipment</span><h3>Agricultural Equipment</h3><p>Ask us about available agricultural equipment.</p><div class="price">Price on enquiry</div><a class="smallbtn" href="https://wa.me/923468600616?text=Assalam-o-Alaikum%2C%20please%20share%20agricultural%20equipment%20availability%20and%20prices." target="_blank" rel="noopener">Ask on WhatsApp</a></div></article>
+  </div>
+  <div class="note"><strong>For the store owner:</strong> This is the first public website version. Product management with a private owner login and shared online database will be connected in the next setup step. Do not put private passwords or customer information in this page.</div>
+  <section id="contact"><div class="intro"><h2>Visit or Contact Us</h2><p>We welcome farmers from Wadhi and nearby areas.</p></div>
+    <div class="info">
+      <article><h3>📍 Store Address</h3><p>Wadhi, near PSO Pump,<br>Tehsil Shahpur, District Sargodha,<br>Punjab, Pakistan</p></article>
+      <article><h3>📱 WhatsApp / Phone</h3><p><a href="https://wa.me/923468600616">+92 346 8600616</a></p><a class="smallbtn" href="https://wa.me/923468600616" target="_blank" rel="noopener">Message the store</a></article>
+      <article><h3>🕒 Product Enquiries</h3><p>Message us to confirm current prices, stock and availability before visiting.</p></article>
+    </div>
+  </section>
+</main>
+<footer><p><strong>Jhammat and Khan Zarai Markaz</strong></p><p>Wadhi, Tehsil Shahpur, District Sargodha, Pakistan</p><p>© 2026 Jhammat and Khan Zarai Markaz</p></footer>
+<script>
+const search=document.getElementById('search'), category=document.getElementById('category');
+function filterCards(){const q=search.value.toLowerCase(),c=category.value;document.querySelectorAll('.card').forEach(card=>{const matchText=card.dataset.name.toLowerCase().includes(q),matchCat=c==='all'||card.dataset.category===c;card.style.display=matchText&&matchCat?'':'none';});}
+search.addEventListener('input',filterCards);category.addEventListener('change',filterCards);
+</script>
+</body>
+</html>
