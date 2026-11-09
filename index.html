@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -171,6 +172,18 @@ footer{text-align:center;padding:25px;background:#104d29;color:white}
 <button onclick="exportStock()">Export Stock</button>
 <h3>Website Traffic</h3><div id="traffic"></div>
 </div>
+
+<div id="viewersTab" class="panel hidden">
+<h2>Real-Time Website Viewers</h2>
+<div class="stat">
+<strong id="activeCount">0</strong>
+People viewing your website now
+</div>
+<p id="viewerStatus">Waiting for visitor data...</p>
+<button onclick="loadViewers()">Refresh Viewers</button>
+<p class="small">Counts browser sessions active within the last 2 minutes.</p>
+</div>
+
 </div>
 </section>
 </main>
@@ -192,6 +205,8 @@ function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&l
 function showTab(id){
 document.querySelectorAll("#admin .panel").forEach(x=>x.classList.add("hidden"));
 document.getElementById(id).classList.remove("hidden");
+if(id==="viewersTab")loadViewers();
+if(id==="reportsTab")loadTraffic();
 }
 async function login(){
 let {data,error}=await db.auth.signInWithPassword({email:email.value,password:password.value});
@@ -377,8 +392,47 @@ traffic.textContent="Total page visits: "+data.length+" | Today: "+data.filter(x
 async function recordVisit(){
 await db.from("site_visits").insert({page:location.pathname});
 }
+
+/* REAL-TIME VIEWER TRACKING */
+let visitorSessionId=localStorage.getItem("jk_visitor_session");
+if(!visitorSessionId){
+visitorSessionId=(crypto.randomUUID?crypto.randomUUID():"v-"+Date.now()+"-"+Math.random().toString(36).slice(2));
+localStorage.setItem("jk_visitor_session",visitorSessionId);
+}
+
+async function sendVisitorHeartbeat(){
+const {error}=await db.rpc("record_visitor_heartbeat",{
+p_session_id:visitorSessionId,
+p_page:location.pathname
+});
+if(error)console.error("Visitor heartbeat error:",error.message);
+}
+
+async function loadViewers(){
+const status=document.getElementById("viewerStatus");
+const count=document.getElementById("activeCount");
+status.textContent="Loading viewers...";
+const cutoff=new Date(Date.now()-120000).toISOString();
+
+const {data,error}=await db
+.from("active_visitors")
+.select("session_id,last_seen,page")
+.gte("last_seen",cutoff);
+
+if(error){
+status.textContent="Could not load viewers: "+error.message;
+return;
+}
+
+count.textContent=(data||[]).length;
+status.textContent="Active browser sessions in the last 2 minutes. Updated "+new Date().toLocaleTimeString();
+}
+
 async function start(){
-await recordVisit();await loadProducts();
+await recordVisit();
+await sendVisitorHeartbeat();
+setInterval(sendVisitorHeartbeat,30000);
+await loadProducts();
 let {data}=await db.auth.getSession();
 if(data.session&&data.session.user.id===OWNER_ID)await openAdmin();
 }
