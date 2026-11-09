@@ -2,300 +2,408 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Jhammat and Khan Zarai Markaz</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Jhammat and Khan Zarai Markaz – agricultural products and farmer support in Wadhi, Shahpur, Sargodha.">
+<title>Jhammat & Khan Zarai Markaz</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
+:root {
+  --green:#176b3a;
+  --dark:#104b2b;
+  --light:#eaf5ed;
+  --gold:#e4b84c;
+  --text:#24352a;
+  --muted:#66766b;
+}
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f5f8f4;color:#203326}
-header{background:linear-gradient(120deg,#104b2b,#23834b);color:white;padding:25px 5%}
-.wrap{max-width:1100px;margin:auto}
-.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-h1{margin:0;font-size:27px}
-header p{color:#e5f3e8}
-.hero{padding:25px 0}
-.hero h2{font-size:34px}
-button,.btn{border:0;background:#176b3a;color:white;padding:11px 16px;border-radius:8px;cursor:pointer;text-decoration:none;display:inline-block;font-weight:bold}
-button:hover,.btn:hover{background:#104b2b}
-main{max-width:1100px;margin:25px auto;padding:0 5%}
-input,select,textarea{width:100%;padding:12px;border:1px solid #ccd8ce;border-radius:8px;margin:5px 0;font:inherit;background:white}
-.filters{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
-.filters input{flex:2;min-width:180px}
-.filters select{flex:1;min-width:160px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-.card{background:white;border:1px solid #e0e8e1;border-radius:12px;overflow:hidden}
-.photo{height:150px;background:#e7f0e8;display:grid;place-items:center;font-size:45px}
-.photo img{width:100%;height:100%;object-fit:cover}
-.details{padding:15px}
-.details h3{margin:5px 0}
-.category{color:#176b3a;font-size:12px;font-weight:bold;text-transform:uppercase}
-.price{font-size:21px;font-weight:bold;color:#176b3a}
-.stock{font-size:13px;color:#617366}
-.panel{background:white;padding:20px;margin:25px 0;border:1px solid #dce6dd;border-radius:12px}
-.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.formgrid textarea,.wide{grid-column:1/-1}
+body{margin:0;font-family:Arial,sans-serif;color:var(--text);background:#f7faf7}
+header{background:white;padding:14px 5%;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;border-bottom:1px solid #e3ece5}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:58px;height:58px}
+.brand h1{font-size:19px;margin:0;color:var(--dark)}
+.brand small{color:var(--muted)}
+nav{display:flex;gap:17px;flex-wrap:wrap}
+nav a{color:var(--dark);text-decoration:none;font-weight:bold;font-size:14px}
+.hero{background:linear-gradient(120deg,#104b2b,#23834a);color:white;padding:65px 7%;text-align:center}
+.hero h2{font-size:36px;margin:0 0 15px}
+.hero p{max-width:650px;margin:0 auto 25px;line-height:1.7}
+.btn{display:inline-block;padding:12px 20px;border-radius:7px;background:var(--gold);color:#183b24;text-decoration:none;font-weight:bold;border:0;cursor:pointer}
+.btn.green{background:var(--green);color:white}
+section{padding:40px 6%}
+.section-title{text-align:center;color:var(--dark);margin:0 0 25px}
+.categories{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px}
+.category{background:white;padding:22px;text-align:center;border-radius:12px;box-shadow:0 2px 12px #0000000c;font-weight:bold;color:var(--green)}
+.searchbar{width:100%;max-width:450px;padding:13px;border:1px solid #cbd9ce;border-radius:8px;font-size:15px;margin:0 auto 20px;display:block}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.product{background:white;border-radius:12px;overflow:hidden;box-shadow:0 3px 14px #00000010}
+.product img{width:100%;height:175px;object-fit:cover;background:#eaf5ed}
+.product-content{padding:15px}
+.product h3{margin:0 0 8px;color:var(--dark)}
+.product p{color:var(--muted);font-size:14px;line-height:1.5}
+.price{font-size:20px;color:var(--green);font-weight:bold}
+.stock{font-size:12px;color:var(--muted)}
+.product .btn{margin-top:10px}
+.about{background:var(--light);text-align:center;line-height:1.8}
+.contact{text-align:center}
+footer{background:#103e25;color:white;text-align:center;padding:25px;line-height:1.8}
+.admin{background:white;border:1px solid #dce8df;border-radius:12px;padding:20px;max-width:850px;margin:25px auto}
+.admin input,.admin textarea,.admin select{width:100%;padding:11px;margin:6px 0 12px;border:1px solid #ccd9cf;border-radius:6px;font-size:14px}
+.admin label{font-weight:bold;font-size:13px}
+.admin-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
 .hidden{display:none!important}
-.message{font-size:14px;color:#a32c2c}
-.adminrow{border:1px solid #ddd;padding:12px;margin:8px 0;border-radius:8px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
-footer{background:#103d27;color:white;padding:25px;text-align:center;margin-top:30px}
-@media(max-width:550px){.formgrid{grid-template-columns:1fr}.formgrid textarea{grid-column:auto}.hero h2{font-size:27px}}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin:20px 0}
+.stat{background:var(--light);padding:18px;border-radius:9px;text-align:center}
+.stat strong{display:block;font-size:25px;color:var(--green);margin-top:8px}
+.notice{font-size:13px;color:var(--muted)}
+@media(max-width:600px){
+ .hero h2{font-size:27px}
+ header{justify-content:center}
+ nav{justify-content:center}
+ section{padding:30px 5%}
+}
 </style>
 </head>
+
 <body>
+
 <header>
-<div class="wrap">
-<div class="top">
-<h1>🌱 Jhammat and Khan Zarai Markaz</h1>
-<a class="btn" href="https://wa.me/923468600616">WhatsApp us</a>
-</div>
-<div class="hero">
-<h2>Your trusted agricultural partner</h2>
-<p>Quality agricultural products for farmers in Wadhi, Shahpur and surrounding areas.</p>
-</div>
-</div>
+ <div class="brand">
+  <svg class="logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+   <circle cx="50" cy="50" r="47" fill="#eaf5ed" stroke="#176b3a" stroke-width="3"/>
+   <path d="M50 79 Q48 48 29 24 M50 79 Q53 45 72 20" fill="none" stroke="#176b3a" stroke-width="4" stroke-linecap="round"/>
+   <path d="M39 49 Q20 45 23 30 Q39 31 39 49 M52 43 Q70 38 75 24 Q58 23 52 43 M45 62 Q26 59 25 46 Q42 45 45 62 M56 58 Q75 54 78 40 Q61 39 56 58" fill="#63a96b" stroke="#176b3a" stroke-width="1.5"/>
+   <path d="M50 79 L50 89" stroke="#176b3a" stroke-width="4" stroke-linecap="round"/>
+  </svg>
+  <div>
+   <h1>Jhammat & Khan Zarai Markaz</h1>
+   <small>Your Trusted Agricultural Partner</small>
+  </div>
+ </div>
+ <nav>
+  <a href="#home">Home</a>
+  <a href="#categories">Categories</a>
+  <a href="#products">Products</a>
+  <a href="#about">About</a>
+  <a href="#contact">Contact</a>
+ </nav>
 </header>
-<main>
-<h2>Our Products</h2>
-<p>Browse products and contact us for orders and enquiries.</p>
-<div class="filters">
-<input id="search" placeholder="Search products...">
-<select id="filter">
-<option value="">All categories</option>
-<option>Fertilisers</option>
-<option>Seeds</option>
-<option>Crop Protection</option>
-<option>Agricultural Equipment</option>
-<option>Other</option>
-</select>
+
+<div class="hero" id="home">
+ <h2>Growing Better Farms Together</h2>
+ <p>Your trusted source for agricultural products. Explore our products and contact us for prices, availability and orders.</p>
+ <a class="btn" href="#products">Explore Products</a>
 </div>
-<div id="products" class="grid">Loading products...</div>
-<section class="panel">
-<h2>Contact our store</h2>
-<p>📍 Wadhi near PSO pump, Tehsil Shahpur, District Sargodha, Pakistan</p>
-<p>📞 +92 346 8600616</p>
-<a class="btn" href="https://wa.me/923468600616">Message us on WhatsApp</a>
+
+<section id="categories">
+ <h2 class="section-title">Our Categories</h2>
+ <div class="categories">
+  <div class="category">🌱 Seeds</div>
+  <div class="category">🌾 Fertilisers</div>
+  <div class="category">🛡️ Pesticides</div>
+  <div class="category">🚜 Other Products</div>
+ </div>
 </section>
-<section class="panel">
-<div id="loginPanel">
-<h2>🔐 Store owner login</h2>
-<p>Only the store owner can manage products.</p>
-<input id="email" type="email" placeholder="Owner email">
-<input id="password" type="password" placeholder="Password">
-<button id="login">Log in</button>
-<p id="loginMessage" class="message"></p>
-</div>
-<div id="adminPanel" class="hidden">
-<div class="top">
-<h2>Store management</h2>
-<button id="logout">Log out</button>
-</div>
-<h3 id="formHeading">Add a new product</h3>
-<form id="productForm">
-<input id="productId" type="hidden">
-<div class="formgrid">
-<input id="name" placeholder="Product name" required>
-<select id="category" required>
-<option value="">Choose category</option>
-<option>Fertilisers</option>
-<option>Seeds</option>
-<option>Crop Protection</option>
-<option>Agricultural Equipment</option>
-<option>Other</option>
-</select>
-<input id="price" type="number" min="0" step="0.01" placeholder="Price in PKR" required>
-<select id="stock">
-<option>In stock</option>
-<option>Out of stock</option>
-</select>
-<input id="image" class="wide" type="url" placeholder="Product image URL (HTTPS)">
-<textarea id="description" class="wide" rows="3" placeholder="Product description"></textarea>
-</div>
-<button type="submit">Save product</button>
-<button type="button" id="clear">Clear form</button>
-<p id="adminMessage" class="message"></p>
-</form>
-<h3>Manage existing products</h3>
-<div id="adminProducts"></div>
-</div>
+
+<section id="products">
+ <h2 class="section-title">Our Products</h2>
+ <input class="searchbar" id="search" placeholder="Search products..." oninput="renderProducts()">
+ <div class="products" id="product-list">
+  <p>Loading products...</p>
+ </div>
 </section>
-</main>
+
+<section class="about" id="about">
+ <h2 class="section-title">About Us</h2>
+ <p><strong>Jhammat and Khan Zarai Markaz</strong> is an agricultural products store serving farmers in Wadhi, Tehsil Shahpur, District Sargodha. We aim to support farmers with agricultural products and friendly customer service.</p>
+</section>
+
+<section class="contact" id="contact">
+ <h2 class="section-title">Contact Us</h2>
+ <p>📍 Wadhi near PSO Pump, Tehsil Shahpur, District Sargodha, Pakistan</p>
+ <p>📞 +92 346 8600616</p>
+ <a class="btn green" href="https://wa.me/923468600616" target="_blank">Chat with us on WhatsApp</a>
+</section>
+
+<section>
+ <div class="admin">
+  <h2 class="section-title">Owner Administration</h2>
+  <div id="login-area">
+   <p class="notice">This area is for the store owner only.</p>
+   <label>Email address</label>
+   <input id="email" type="email" placeholder="Owner email">
+   <label>Password</label>
+   <input id="password" type="password" placeholder="Password">
+   <button class="btn green" onclick="login()">Owner Login</button>
+   <p id="login-message" class="notice"></p>
+  </div>
+
+  <div id="admin-area" class="hidden">
+   <p><strong>You are logged in as owner.</strong></p>
+   <button class="btn" onclick="logout()">Logout</button>
+
+   <h3>Traffic Dashboard</h3>
+   <div class="stats">
+    <div class="stat">Total visits<strong id="total-visits">—</strong></div>
+    <div class="stat">Today's visits<strong id="today-visits">—</strong></div>
+    <div class="stat">This month's visits<strong id="month-visits">—</strong></div>
+   </div>
+   <p class="notice">These figures count recorded page visits, not verified unique people. Traffic tracking starts after the traffic database setup is completed.</p>
+
+   <hr>
+   <h3 id="form-heading">Add New Product</h3>
+   <div class="admin-grid">
+    <div>
+     <label>Product name</label>
+     <input id="p-name" placeholder="Product name">
+    </div>
+    <div>
+     <label>Category</label>
+     <select id="p-category">
+      <option>Seeds</option>
+      <option>Fertilisers</option>
+      <option>Pesticides</option>
+      <option>Other Products</option>
+     </select>
+    </div>
+    <div>
+     <label>Price (PKR)</label>
+     <input id="p-price" type="number" min="0" placeholder="e.g. 2500">
+    </div>
+    <div>
+     <label>Stock status</label>
+     <select id="p-stock">
+      <option>Available</option>
+      <option>Out of stock</option>
+     </select>
+    </div>
+   </div>
+   <label>Description</label>
+   <textarea id="p-description" rows="3" placeholder="Product details"></textarea>
+   <label>Product image URL (optional)</label>
+   <input id="p-image" placeholder="Paste an image URL">
+   <button class="btn green" id="save-button" onclick="saveProduct()">Add Product</button>
+   <button class="btn hidden" id="cancel-edit" onclick="resetForm()">Cancel Edit</button>
+   <p id="product-message" class="notice"></p>
+
+   <h3>Manage Products</h3>
+   <div id="manage-list"></div>
+  </div>
+ </div>
+</section>
+
 <footer>
-<strong>Jhammat and Khan Zarai Markaz</strong>
-<p>Wadhi, Tehsil Shahpur, District Sargodha, Pakistan</p>
-<p>© 2026</p>
+ <strong>Jhammat & Khan Zarai Markaz</strong><br>
+ Wadhi near PSO Pump, Tehsil Shahpur, District Sargodha<br>
+ WhatsApp: +92 346 8600616<br>
+ © <span id="year"></span> All rights reserved.
 </footer>
-<script type="module">
-import {createClient} from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
-const supabase=createClient(
-'https://kdavpmdioiztfhvdczlz.supabase.co',
-'sb_publishable_icXsw0UUDfn1ULktMav2kQ_3C9dUPRm'
-);
+<script>
+const SUPABASE_URL = "https://kdavpmdioiztfhvdczlz.supabase.co";
+const SUPABASE_KEY = "sb_publishable_icXsw0UUDfn1ULktMav2kQ_3C9dUPRm";
 
-const $=id=>document.getElementById(id);
-let products=[];
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+let products = [];
+let editingId = null;
 
-function safeText(value=''){
-return String(value).replace(/[&<>"']/g,c=>({
-'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
-}[c]));
-}
-function safeImage(value){
-try{
-const u=new URL(value);
-return u.protocol==='https:'?u.href:'';
-}catch{return '';}
-}
-function render(){
-const q=$('search').value.toLowerCase();
-const cat=$('filter').value;
-const list=products.filter(p=>
-(!cat||p.category===cat)&&
-[p.name,p.description,p.category].join(' ').toLowerCase().includes(q)
-);
-if(!list.length){
-$('products').innerHTML='<p>No products available yet. Please contact our store.</p>';
-return;
-}
-$('products').innerHTML=list.map(p=>{
-const img=safeImage(p.image_url||'');
-return `
-<div class="card">
-<div class="photo">${img?`<img src="${safeText(img)}" alt="${safeText(p.name)}">`:'🌱'}</div>
-<div class="details">
-<span class="category">${safeText(p.category||'Other')}</span>
-<h3>${safeText(p.name)}</h3>
-<p>${safeText(p.description||'Contact us for details.')}</p>
-<div class="price">PKR ${Number(p.price).toLocaleString('en-PK')}</div>
-<p class="stock">${safeText(p.stock_status||'Contact for availability')}</p>
-<a class="btn" target="_blank" rel="noopener" href="https://wa.me/923468600616?text=${encodeURIComponent('Assalam-o-Alaikum, I am interested in '+p.name+'. Please share details.')}">Enquire on WhatsApp</a>
-</div>
-</div>`;
-}).join('');
-}
-function renderAdmin(){
-$('adminProducts').innerHTML=products.map(p=>`
-<div class="adminrow">
-<span><strong>${safeText(p.name)}</strong><br>PKR ${Number(p.price).toLocaleString('en-PK')}</span>
-<span>
-<button data-edit="${safeText(p.id)}">Edit</button>
-<button data-delete="${safeText(p.id)}" style="background:#a52b2b">Delete</button>
-</span>
-</div>`).join('')||'<p>No products added yet.</p>';
-}
+document.getElementById("year").textContent = new Date().getFullYear();
+
 async function loadProducts(){
-const {data,error}=await supabase.from('products').select('*').order('created_at',{ascending:false});
-if(error){
-$('products').textContent='Unable to load products. Please check database setup.';
-console.error(error);
-return;
+ const {data,error} = await db.from("products").select("*").order("created_at",{ascending:false});
+ const list = document.getElementById("product-list");
+ if(error){
+  list.innerHTML = "<p>Unable to load products. Please try again later.</p>";
+  console.error(error);
+  return;
+ }
+ products = data || [];
+ renderProducts();
+ renderManageList();
 }
-products=data||[];
-render();
-if(!$('adminPanel').classList.contains('hidden'))renderAdmin();
-}
-function showAdmin(show){
-$('loginPanel').classList.toggle('hidden',show);
-$('adminPanel').classList.toggle('hidden',!show);
-}
-function clearForm(){
-$('productForm').reset();
-$('productId').value='';
-$('formHeading').textContent='Add a new product';
-}
-$('login').addEventListener('click',async()=>{
-$('loginMessage').textContent='Logging in...';
-const {error}=await supabase.auth.signInWithPassword({
-email:$('email').value.trim(),
-password:$('password').value
-});
-if(error){
-$('loginMessage').textContent=error.message;
-return;
-}
-$('loginMessage').textContent='';
-showAdmin(true);
-await loadProducts();
-});
-$('logout').addEventListener('click',async()=>{
-await supabase.auth.signOut();
-showAdmin(false);
-$('password').value='';
-$('loginMessage').textContent='You are logged out.';
-});
-$('productForm').addEventListener('submit',async e=>{
-e.preventDefault();
-const id=$('productId').value;
-const rawImage=$('image').value.trim();
-const image=rawImage?safeImage(rawImage):null;
-if(rawImage&&!image){
-$('adminMessage').textContent='Please enter a valid HTTPS image URL.';
-return;
-}
-const record={
-name:$('name').value.trim(),
-category:$('category').value,
-price:Number($('price').value),
-stock_status:$('stock').value,
-image_url:image,
-description:$('description').value.trim()
-};
-$('adminMessage').textContent='Saving product...';
-const result=id
-?await supabase.from('products').update(record).eq('id',id)
-:await supabase.from('products').insert(record);
-if(result.error){
-$('adminMessage').textContent=result.error.message;
-return;
-}
-$('adminMessage').textContent='Product saved successfully!';
-clearForm();
-await loadProducts();
-});
-$('clear').addEventListener('click',()=>{
-clearForm();
-$('adminMessage').textContent='';
-});
-$('adminProducts').addEventListener('click',async e=>{
-const edit=e.target.dataset.edit;
-const del=e.target.dataset.delete;
-if(edit){
-const p=products.find(x=>String(x.id)===edit);
-if(!p)return;
-$('productId').value=p.id;
-$('name').value=p.name||'';
-$('category').value=p.category||'';
-$('price').value=p.price??'';
-$('stock').value=p.stock_status||'In stock';
-$('image').value=p.image_url||'';
-$('description').value=p.description||'';
-$('formHeading').textContent='Edit product';
-window.scrollTo({top:document.querySelector('#productForm').offsetTop,behavior:'smooth'});
-}
-if(del&&confirm('Are you sure you want to delete this product?')){
-const {error}=await supabase.from('products').delete().eq('id',del);
-if(error){
-$('adminMessage').textContent=error.message;
-return;
-}
-$('adminMessage').textContent='Product deleted.';
-await loadProducts();
-}
-});
-$('search').addEventListener('input',render);
-$('filter').addEventListener('change',render);
 
-supabase.auth.onAuthStateChange((_event,session)=>{
-showAdmin(!!session);
-if(session)loadProducts();
+function renderProducts(){
+ const query = document.getElementById("search").value.toLowerCase();
+ const filtered = products.filter(p =>
+  (p.name || "").toLowerCase().includes(query) ||
+  (p.category || "").toLowerCase().includes(query)
+ );
+ const list = document.getElementById("product-list");
+ if(!filtered.length){
+  list.innerHTML = "<p>No products found. Please check again soon.</p>";
+  return;
+ }
+ list.innerHTML = filtered.map(p => `
+  <article class="product">
+   <img src="${escapeHTML(p.image_url || "https://placehold.co/600x400/eaf5ed/176b3a?text=Agricultural+Product")}" alt="${escapeHTML(p.name)}" onerror="this.src='https://placehold.co/600x400/eaf5ed/176b3a?text=Product'">
+   <div class="product-content">
+    <h3>${escapeHTML(p.name)}</h3>
+    <small>${escapeHTML(p.category || "")}</small>
+    <p>${escapeHTML(p.description || "")}</p>
+    <div class="price">Rs. ${Number(p.price || 0).toLocaleString("en-PK")}</div>
+    <div class="stock">${escapeHTML(p.stock_status || "Available")}</div>
+    <a class="btn green" target="_blank" href="https://wa.me/923468600616?text=${encodeURIComponent("Assalam o Alaikum, I am interested in " + p.name)}">Enquire on WhatsApp</a>
+   </div>
+  </article>
+ `).join("");
+}
+
+function escapeHTML(value){
+ return String(value ?? "").replace(/[&<>"']/g, c => ({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ }[c]));
+}
+
+async function login(){
+ const email = document.getElementById("email").value.trim();
+ const password = document.getElementById("password").value;
+ const msg = document.getElementById("login-message");
+ msg.textContent = "Logging in...";
+ const {error} = await db.auth.signInWithPassword({email,password});
+ if(error){
+  msg.textContent = error.message;
+  return;
+ }
+ msg.textContent = "";
+ showAdmin();
+}
+
+async function logout(){
+ await db.auth.signOut();
+ document.getElementById("admin-area").classList.add("hidden");
+ document.getElementById("login-area").classList.remove("hidden");
+}
+
+async function showAdmin(){
+ document.getElementById("login-area").classList.add("hidden");
+ document.getElementById("admin-area").classList.remove("hidden");
+ await loadProducts();
+ await loadTraffic();
+}
+
+async function saveProduct(){
+ const name = document.getElementById("p-name").value.trim();
+ const price = document.getElementById("p-price").value;
+ const msg = document.getElementById("product-message");
+ if(!name || price === "" || Number(price) < 0){
+  msg.textContent = "Please enter a product name and a valid price.";
+  return;
+ }
+ const product = {
+  name,
+  category:document.getElementById("p-category").value,
+  price:Number(price),
+  stock_status:document.getElementById("p-stock").value,
+  description:document.getElementById("p-description").value.trim(),
+  image_url:document.getElementById("p-image").value.trim()
+ };
+ msg.textContent = "Saving...";
+ let result;
+ if(editingId){
+  result = await db.from("products").update(product).eq("id",editingId);
+ }else{
+  result = await db.from("products").insert([product]);
+ }
+ if(result.error){
+  msg.textContent = result.error.message;
+  return;
+ }
+ msg.textContent = "Product saved successfully.";
+ resetForm();
+ await loadProducts();
+}
+
+function editProduct(id){
+ const p = products.find(x => String(x.id) === String(id));
+ if(!p) return;
+ editingId = p.id;
+ document.getElementById("p-name").value = p.name || "";
+ document.getElementById("p-category").value = p.category || "Other Products";
+ document.getElementById("p-price").value = p.price || "";
+ document.getElementById("p-stock").value = p.stock_status || "Available";
+ document.getElementById("p-description").value = p.description || "";
+ document.getElementById("p-image").value = p.image_url || "";
+ document.getElementById("form-heading").textContent = "Edit Product";
+ document.getElementById("save-button").textContent = "Update Product";
+ document.getElementById("cancel-edit").classList.remove("hidden");
+ document.getElementById("p-name").scrollIntoView({behavior:"smooth"});
+}
+
+function resetForm(){
+ editingId = null;
+ ["p-name","p-price","p-description","p-image"].forEach(id => document.getElementById(id).value = "");
+ document.getElementById("p-category").value = "Seeds";
+ document.getElementById("p-stock").value = "Available";
+ document.getElementById("form-heading").textContent = "Add New Product";
+ document.getElementById("save-button").textContent = "Add Product";
+ document.getElementById("cancel-edit").classList.add("hidden");
+}
+
+async function deleteProduct(id){
+ if(!confirm("Are you sure you want to delete this product?")) return;
+ const {error} = await db.from("products").delete().eq("id",id);
+ if(error){
+  alert(error.message);
+  return;
+ }
+ await loadProducts();
+}
+
+function renderManageList(){
+ const el = document.getElementById("manage-list");
+ if(!el) return;
+ if(!products.length){
+  el.innerHTML = "<p>No products added yet.</p>";
+  return;
+ }
+ el.innerHTML = products.map(p => `
+  <div style="padding:12px 0;border-bottom:1px solid #e3ece5">
+   <strong>${escapeHTML(p.name)}</strong> — Rs. ${Number(p.price || 0).toLocaleString("en-PK")}
+   <br><button class="btn green" style="margin-top:8px" onclick="editProduct('${String(p.id).replace(/'/g,"")}')">Edit</button>
+   <button class="btn" style="margin-top:8px;background:#f2dddd;color:#8b2222" onclick="deleteProduct('${String(p.id).replace(/'/g,"")}')">Delete</button>
+  </div>
+ `).join("");
+}
+
+async function recordVisit(){
+ try{
+  await db.from("site_visits").insert([{
+   page:location.pathname || "/"
+  }]);
+ }catch(e){
+  console.log("Traffic tracking is not configured yet.");
+ }
+}
+
+async function loadTraffic(){
+ const totalEl = document.getElementById("total-visits");
+ const todayEl = document.getElementById("today-visits");
+ const monthEl = document.getElementById("month-visits");
+ totalEl.textContent = todayEl.textContent = monthEl.textContent = "…";
+
+ const {data,error} = await db.from("site_visits").select("visited_at");
+ if(error){
+  totalEl.textContent = todayEl.textContent = monthEl.textContent = "Not set up";
+  return;
+ }
+ const visits = data || [];
+ const now = new Date();
+ const today = now.toLocaleDateString("en-CA");
+ const month = today.slice(0,7);
+ const countToday = visits.filter(v => v.visited_at && new Date(v.visited_at).toLocaleDateString("en-CA") === today).length;
+ const countMonth = visits.filter(v => v.visited_at && new Date(v.visited_at).toLocaleDateString("en-CA").slice(0,7) === month).length;
+ totalEl.textContent = visits.length;
+ todayEl.textContent = countToday;
+ monthEl.textContent = countMonth;
+}
+
+db.auth.getSession().then(({data}) => {
+ if(data.session) showAdmin();
 });
 
-await loadProducts();
-const {data}=await supabase.auth.getSession();
-showAdmin(!!data.session);
-if(data.session){
-await loadProducts();
-renderAdmin();
-}
+recordVisit();
+loadProducts();
 </script>
 </body>
 </html>
