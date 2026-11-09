@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,375 +13,109 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
-:root {
- --green:#14532d;
- --dark:#092d19;
- --light:#e9f5e7;
- --lime:#b8e986;
- --gold:#e8b94d;
- --text:#203b2a;
- --muted:#6b7d70;
- --white:#fff;
- --shadow:0 12px 35px rgba(20,83,45,.10);
-}
+:root{--green:#14532d;--dark:#092d19;--light:#e9f5e7;--lime:#b8e986;--gold:#e8b94d;--text:#203b2a;--muted:#6b7d70;--shadow:0 12px 35px rgba(20,83,45,.10)}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:85px}
-body{
- margin:0;
- font-family:Arial,Helvetica,sans-serif;
- background:#f5f8f2;
- color:var(--text);
-}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f5f8f2;color:var(--text)}
 button,a{cursor:pointer}
-button{
- background:var(--green);
- color:white;
- border:0;
- border-radius:9px;
- padding:12px 18px;
- font-weight:bold;
- transition:.25s;
-}
-button:hover{
- background:#0b3c20;
- transform:translateY(-2px);
- box-shadow:0 5px 15px #0002;
-}
-input,select,textarea{
- width:100%;
- padding:13px;
- margin:7px 0 14px;
- border:1px solid #d6e1d5;
- border-radius:9px;
- font-size:15px;
- background:white;
- color:#263b2d;
-}
-input:focus,select:focus,textarea:focus{
- outline:2px solid #8fcf8e;
- border-color:var(--green);
-}
+button{background:var(--green);color:white;border:0;border-radius:9px;padding:12px 18px;font-weight:bold;transition:.2s}
+button:hover{background:#0b3c20;transform:translateY(-2px);box-shadow:0 5px 15px #0002}
+input,select,textarea{width:100%;padding:13px;margin:7px 0 14px;border:1px solid #d6e1d5;border-radius:9px;font-size:15px;background:white;color:#263b2d}
+input:focus,select:focus,textarea:focus{outline:2px solid #8fcf8e;border-color:var(--green)}
 label{font-weight:bold;font-size:14px}
-header{
- background:rgba(9,45,25,.97);
- color:white;
- padding:13px 5%;
- display:flex;
- justify-content:space-between;
- align-items:center;
- gap:15px;
- flex-wrap:wrap;
- position:sticky;
- top:0;
- z-index:100;
- box-shadow:0 4px 20px #0002;
-}
+header{background:rgba(9,45,25,.98);color:white;padding:13px 5%;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px #0002}
 .brand{display:flex;align-items:center;gap:12px}
-.brand-icon{
- width:49px;height:49px;
- border-radius:15px;
- background:#d5efb9;
- display:flex;
- justify-content:center;
- align-items:center;
- font-size:30px;
-}
-.brand h1{font-size:20px;margin:0}
-.brand p{font-size:11px;margin:5px 0 0;color:#c5e6c5}
-nav{display:flex;gap:19px;align-items:center;flex-wrap:wrap}
-nav a{
- color:white;
- text-decoration:none;
- font-size:13px;
- font-weight:bold;
-}
+.brand-icon{width:49px;height:49px;border-radius:15px;background:#d5efb9;display:flex;justify-content:center;align-items:center;font-size:30px}
+.brand h1{font-size:20px;margin:0}.brand p{font-size:11px;margin:5px 0 0;color:#c5e6c5}
+nav{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+nav a{color:white;text-decoration:none;font-size:13px;font-weight:bold}
 nav a:hover{color:var(--lime)}
-.hero{
- min-height:540px;
- display:flex;
- align-items:center;
- padding:65px 8%;
- color:white;
- background:
- linear-gradient(90deg,rgba(5,36,18,.95),rgba(9,48,25,.68),rgba(9,48,25,.10)),
- url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1800") center/cover;
-}
-.hero-content{max-width:690px}
-.hero-tag{
- display:inline-block;
- background:var(--lime);
- color:var(--green);
- padding:10px 17px;
- border-radius:30px;
- font-size:12px;
- font-weight:bold;
- letter-spacing:1px;
-}
-.hero h2{
- font-size:clamp(39px,6vw,68px);
- line-height:1.08;
- margin:22px 0;
- color:white;
-}
-.hero h2 span{color:var(--lime)}
-.hero p{
- font-size:17px;
- line-height:1.8;
- max-width:550px;
- color:#e5f0e5;
-}
+.hero{min-height:540px;display:flex;align-items:center;padding:65px 8%;color:white;background:linear-gradient(90deg,rgba(5,36,18,.95),rgba(9,48,25,.68),rgba(9,48,25,.10)),url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1800") center/cover}
+.hero-content{max-width:690px}.hero-tag{display:inline-block;background:var(--lime);color:var(--green);padding:10px 17px;border-radius:30px;font-size:12px;font-weight:bold;letter-spacing:1px}
+.hero h2{font-size:clamp(39px,6vw,68px);line-height:1.08;margin:22px 0;color:white}.hero h2 span{color:var(--lime)}
+.hero p{font-size:17px;line-height:1.8;max-width:550px;color:#e5f0e5}
 .hero-actions{display:flex;gap:13px;flex-wrap:wrap;margin-top:27px}
-.btn-light{background:white;color:var(--green)}
-.btn-outline{background:transparent;border:2px solid white}
-main{max-width:1250px;margin:auto;padding:25px}
-section{margin:48px 0}
+.btn-light{background:white;color:var(--green)}.btn-outline{background:transparent;border:2px solid white}
+main{max-width:1250px;margin:auto;padding:25px}section{margin:48px 0}
 .section-heading{text-align:center;margin-bottom:30px}
 .section-heading h2{font-size:31px;color:var(--green);margin:0 0 9px}
 .section-heading p{color:var(--muted);line-height:1.6}
-.features{
- display:grid;
- grid-template-columns:repeat(4,1fr);
- gap:17px;
- margin-top:-45px;
- position:relative;
- z-index:2;
-}
-.feature{
- background:white;
- padding:25px 15px;
- border-radius:15px;
- text-align:center;
- box-shadow:var(--shadow);
- border-bottom:3px solid #8dc66f;
-}
-.feature span{font-size:35px}
-.feature h3{margin:12px 0 7px;color:var(--green)}
-.feature p{font-size:13px;color:var(--muted);margin:0;line-height:1.5}
-.categories{
- display:grid;
- grid-template-columns:repeat(4,1fr);
- gap:18px;
-}
-.category-card{
- height:230px;
- border-radius:16px;
- overflow:hidden;
- position:relative;
- background:var(--green);
- box-shadow:var(--shadow);
-}
-.category-card img{
- width:100%;height:100%;
- object-fit:cover;
- transition:transform .5s;
-}
+.features{display:grid;grid-template-columns:repeat(4,1fr);gap:17px;margin-top:-45px;position:relative;z-index:2}
+.feature{background:white;padding:25px 15px;border-radius:15px;text-align:center;box-shadow:var(--shadow);border-bottom:3px solid #8dc66f}
+.feature span{font-size:35px}.feature h3{margin:12px 0 7px;color:var(--green)}.feature p{font-size:13px;color:var(--muted);margin:0;line-height:1.5}
+.categories{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.category-card{height:230px;border-radius:16px;overflow:hidden;position:relative;background:var(--green);box-shadow:var(--shadow)}
+.category-card img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
 .category-card:hover img{transform:scale(1.1)}
-.category-overlay{
- position:absolute;
- inset:0;
- background:linear-gradient(0deg,rgba(0,0,0,.85),transparent 80%);
- display:flex;
- flex-direction:column;
- justify-content:flex-end;
- padding:20px;
- color:white;
-}
-.category-overlay h3{margin:0;font-size:21px}
-.category-overlay p{margin:7px 0 0;font-size:13px}
-.products-section{
- background:white;
- padding:30px;
- border-radius:20px;
- box-shadow:var(--shadow);
-}
+.category-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.85),transparent 80%);display:flex;flex-direction:column;justify-content:flex-end;padding:20px;color:white}
+.category-overlay h3{margin:0;font-size:21px}.category-overlay p{margin:7px 0 0;font-size:13px}
+.farm-intro{background:#e7f2df;border-radius:20px;padding:25px;margin-bottom:20px;display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:center}
+.farm-intro img{width:100%;height:260px;object-fit:cover;border-radius:15px}
+.farm-intro h2{color:var(--green);font-size:29px}.farm-intro p{line-height:1.8;color:#536d59}
+.farm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.farm-card{background:white;border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
+.farm-card img{width:100%;height:190px;object-fit:cover;display:block}
+.farm-card div{padding:17px}.farm-card h3{color:var(--green);margin:0 0 8px}
+.farm-card p{font-size:13px;color:var(--muted);line-height:1.6;margin:0}
+.products-section{background:white;padding:30px;border-radius:20px;box-shadow:var(--shadow)}
 .product-tools{max-width:520px;margin:0 auto 25px}
-.grid{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(215px,1fr));
- gap:19px;
-}
-.product{
- border:1px solid #e5ebe2;
- border-radius:15px;
- padding:13px;
- background:white;
- transition:.25s;
- overflow:hidden;
-}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:19px}
+.product{border:1px solid #e5ebe2;border-radius:15px;padding:13px;background:white;transition:.25s;overflow:hidden}
 .product:hover{box-shadow:var(--shadow);transform:translateY(-4px)}
-.product img,.product-placeholder{
- width:100%;
- height:180px;
- object-fit:cover;
- border-radius:11px;
-}
-.product-placeholder{
- background:linear-gradient(135deg,#dcefd2,#f3f8e9);
- display:flex;
- justify-content:center;
- align-items:center;
- font-size:65px;
-}
-.product h3{margin:14px 0 6px;color:var(--green)}
-.product p{font-size:13px;color:var(--muted);line-height:1.5}
+.product img,.product-placeholder{width:100%;height:180px;object-fit:cover;border-radius:11px}
+.product-placeholder{background:linear-gradient(135deg,#dcefd2,#f3f8e9);display:flex;justify-content:center;align-items:center;font-size:65px}
+.product h3{margin:14px 0 6px;color:var(--green)}.product p{font-size:13px;color:var(--muted);line-height:1.5}
 .price{font-size:21px!important;font-weight:bold;color:var(--green)!important}
 .product button{width:100%;margin-top:5px}
-.about-strip{
- background:#e8f3e1;
- border-radius:20px;
- padding:35px;
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:30px;
- align-items:center;
-}
-.about-strip img{
- width:100%;
- height:300px;
- object-fit:cover;
- border-radius:15px;
-}
-.about-strip h2{color:var(--green);font-size:30px}
-.about-strip p{line-height:1.9;color:#536d59}
+.about-strip{background:#e8f3e1;border-radius:20px;padding:35px;display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}
+.about-strip img{width:100%;height:300px;object-fit:cover;border-radius:15px}
+.about-strip h2{color:var(--green);font-size:30px}.about-strip p{line-height:1.9;color:#536d59}
 .about-points{display:flex;gap:15px;flex-wrap:wrap;margin:20px 0}
-.about-points span{
- background:white;padding:10px 14px;border-radius:8px;
- font-size:13px;font-weight:bold;color:var(--green);
-}
-.contact-card{
- background:linear-gradient(135deg,#14532d,#092d19);
- color:white;
- padding:40px 20px;
- border-radius:20px;
- text-align:center;
- box-shadow:var(--shadow);
-}
-.contact-card h2{color:white;font-size:30px}
-.contact-card p{line-height:1.8}
-.contact-card a{color:white}
-footer{
- background:#092d19;
- color:white;
- padding:35px 15px;
- text-align:center;
- margin-top:50px;
-}
-footer h3{color:#d5efb9}
-footer p{margin:9px;font-size:13px;color:#d1e3d2}
+.about-points span{background:white;padding:10px 14px;border-radius:8px;font-size:13px;font-weight:bold;color:var(--green)}
+.contact-card{background:linear-gradient(135deg,#14532d,#092d19);color:white;padding:40px 20px;border-radius:20px;text-align:center;box-shadow:var(--shadow)}
+.contact-card h2{color:white;font-size:30px}.contact-card p{line-height:1.8}.contact-card a{color:white}
+footer{background:#092d19;color:white;padding:35px 15px;text-align:center;margin-top:50px}
+footer h3{color:#d5efb9}footer p{margin:9px;font-size:13px;color:#d1e3d2}
 .hidden{display:none!important}
-.panel{
- background:white;
- padding:22px;
- margin:16px 0;
- border-radius:14px;
- box-shadow:0 3px 15px #0001;
- overflow-x:auto;
-}
-.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
-.tabs button{flex:1;min-width:110px}
-.stat{
- background:#e7f3e6;
- padding:17px;
- border-radius:12px;
- color:#42634a;
- font-size:13px;
-}
-.stat strong{
- font-size:22px;
- display:block;
- margin-top:8px;
- color:var(--green);
-}
+.panel{background:white;padding:22px;margin:16px 0;border-radius:14px;box-shadow:0 3px 15px #0001;overflow-x:auto}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}.tabs button{flex:1;min-width:110px}
+.stat{background:#e7f3e6;padding:17px;border-radius:12px;color:#42634a;font-size:13px}
+.stat strong{font-size:22px;display:block;margin-top:8px;color:var(--green)}
 .admin-title{color:var(--green)}
 table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px;min-width:500px}
 th,td{border:1px solid #e0e8df;padding:10px;text-align:left}
 th{background:#e6f2e8;color:var(--green)}
-.red{background:#b83232}
-.red:hover{background:#8d2020}
+.red{background:#b83232}.red:hover{background:#8d2020}
 .small{font-size:12px;color:#777}
-.admin-login{
- max-width:550px;
- margin:40px auto;
- padding:25px;
- background:white;
- border-radius:16px;
- box-shadow:var(--shadow);
-}
-.admin-login h2{color:var(--green)}
-.badge{
- display:inline-block;
- background:#e3f4d9;
- color:var(--green);
- padding:6px 10px;
- border-radius:20px;
- font-size:12px;
- font-weight:bold;
-}
-#loginMessage{color:#b83232}
-.whatsapp-float{
- position:fixed;
- bottom:22px;
- right:20px;
- z-index:200;
- background:#168c48;
- color:white;
- width:57px;
- height:57px;
- display:flex;
- align-items:center;
- justify-content:center;
- border-radius:50%;
- text-decoration:none;
- font-size:29px;
- box-shadow:0 5px 20px #0003;
-}
-@media(max-width:850px){
- .features,.categories{grid-template-columns:repeat(2,1fr)}
-}
+.admin-login{max-width:100%;margin:40px auto;padding:25px;background:white;border-radius:16px;box-shadow:var(--shadow)}
+.admin-login h2{color:var(--green)}#loginMessage{color:#b83232}
+.badge{display:inline-block;background:#e3f4d9;color:var(--green);padding:6px 10px;border-radius:20px;font-size:12px;font-weight:bold}
+.notice{background:#fff8df;border-left:4px solid #d7a72d;padding:12px;border-radius:8px;font-size:13px;line-height:1.6}
+.whatsapp-float{position:fixed;bottom:22px;right:20px;z-index:200;background:#168c48;color:white;width:57px;height:57px;display:flex;align-items:center;justify-content:center;border-radius:50%;text-decoration:none;font-size:29px;box-shadow:0 5px 20px #0003}
+@media(max-width:850px){.features,.categories{grid-template-columns:repeat(2,1fr)}.farm-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:650px){
- header{justify-content:center;text-align:center;padding:13px}
- .brand{justify-content:center}
- .brand h1{font-size:17px}
- nav{justify-content:center;gap:12px}
- nav a{font-size:12px}
- .hero{min-height:450px;padding:45px 7%}
- .hero h2{font-size:42px}
+ header{justify-content:center;text-align:center;padding:13px}.brand{justify-content:center}.brand h1{font-size:17px}
+ nav{justify-content:center;gap:12px}nav a{font-size:12px}
+ .hero{min-height:450px;padding:45px 7%}.hero h2{font-size:42px}
  .features{margin-top:15px;grid-template-columns:repeat(2,1fr)}
- .categories{grid-template-columns:repeat(2,1fr);gap:10px}
- .category-card{height:180px}
- .category-overlay{padding:12px}
- .category-overlay h3{font-size:16px}
- .about-strip{grid-template-columns:1fr;padding:22px}
- .about-strip img{height:220px}
- main{padding:14px}
- .products-section{padding:15px}
+ .categories{grid-template-columns:repeat(2,1fr);gap:10px}.category-card{height:180px}
+ .category-overlay{padding:12px}.category-overlay h3{font-size:16px}
+ .farm-intro,.about-strip{grid-template-columns:1fr;padding:22px}
+ .farm-intro img{height:210px}.farm-grid{grid-template-columns:1fr 1fr}
+ .about-strip img{height:220px}main{padding:14px}.products-section{padding:15px}
  .grid{grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px}
- .product img,.product-placeholder{height:135px}
- .product{padding:9px}
- .product h3{font-size:15px}
- .product button{padding:10px 5px;font-size:12px}
- .section-heading h2{font-size:25px}
- .panel{padding:13px}
+ .product img,.product-placeholder{height:135px}.product{padding:9px}
+ .product h3{font-size:15px}.product button{padding:10px 5px;font-size:12px}
+ .section-heading h2{font-size:25px}.panel{padding:13px}
 }
 </style>
 </head>
-
 <body>
 
 <header>
-<div class="brand">
-<div class="brand-icon">🌿</div>
-<div>
-<h1>Jhammat & Khan Zarai Markaz</h1>
-<p>Growing Together, Growing Better</p>
-</div>
-</div>
+<div class="brand"><div class="brand-icon">🌿</div><div><h1>Jhammat & Khan Zarai Markaz</h1><p>Growing Together, Growing Better</p></div></div>
 <nav>
-<a href="#home">Home</a>
-<a href="#categories">Categories</a>
-<a href="#products">Products</a>
-<a href="#about">About</a>
-<a href="#contact">Contact</a>
+<a href="#home">Home</a><a href="#categories">Categories</a><a href="#farm-supplies">Farm Supplies</a><a href="#products">Products</a><a href="#about">About</a><a href="#contact">Contact</a>
 </nav>
 </header>
 
@@ -389,132 +124,80 @@ th{background:#e6f2e8;color:var(--green)}
 <span class="hero-tag">🌱 YOUR TRUSTED AGRICULTURAL PARTNER</span>
 <h2>Better Farming <span>Starts Here</span></h2>
 <p>Quality agricultural products and farmer support for a healthier, more productive harvest. Helping our farming community grow with confidence.</p>
-<div class="hero-actions">
-<a href="#products"><button>Explore Products →</button></a>
-<a href="https://wa.me/923468600616"><button class="btn-light">WhatsApp Us</button></a>
-</div>
+<div class="hero-actions"><a href="#products"><button>Explore Products →</button></a><a href="https://wa.me/923468600616"><button class="btn-light">WhatsApp Us</button></a></div>
 </div>
 </section>
 
 <main>
-
 <div class="features">
-<div class="feature">
-<span>🌾</span>
-<h3>Quality Products</h3>
-<p>Products for agricultural needs</p>
-</div>
-<div class="feature">
-<span>🌱</span>
-<h3>Farmer Support</h3>
-<p>Helping farmers grow better</p>
-</div>
-<div class="feature">
-<span>🤝</span>
-<h3>Trusted Service</h3>
-<p>Local service you can contact</p>
-</div>
-<div class="feature">
-<span>📍</span>
-<h3>Local Store</h3>
-<p>Serving Wadhi and nearby areas</p>
-</div>
+<div class="feature"><span>🌾</span><h3>Quality Products</h3><p>Products for agricultural needs</p></div>
+<div class="feature"><span>🌱</span><h3>Farmer Support</h3><p>Helping farmers grow better</p></div>
+<div class="feature"><span>🤝</span><h3>Trusted Service</h3><p>Local service you can contact</p></div>
+<div class="feature"><span>📍</span><h3>Local Store</h3><p>Serving Wadhi and nearby areas</p></div>
 </div>
 
 <section id="categories">
-<div class="section-heading">
-<span class="badge">OUR AGRICULTURAL RANGE</span>
-<h2>Explore Our Categories</h2>
-<p>Everything you need to support your farming activities.</p>
-</div>
+<div class="section-heading"><span class="badge">OUR AGRICULTURAL RANGE</span><h2>Explore Our Categories</h2><p>Everything you need to support your farming activities.</p></div>
 <div class="categories">
-<div class="category-card">
-<img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=700" alt="Agricultural crops">
-<div class="category-overlay"><h3>🌾 Fertilisers</h3><p>Supporting healthy crop growth</p></div>
+<div class="category-card"><img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=700" alt="Agricultural crops"><div class="category-overlay"><h3>🌾 Fertilisers</h3><p>Supporting healthy crop growth</p></div></div>
+<div class="category-card"><img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=700" alt="Green farmland"><div class="category-overlay"><h3>🌱 Seeds</h3><p>Start your next growing season</p></div></div>
+<div class="category-card"><img src="https://images.unsplash.com/photo-1499529112087-3cb3b73cec95?w=700" alt="Farm crops"><div class="category-overlay"><h3>🛡️ Crop Protection</h3><p>Explore crop-care products</p></div></div>
+<div class="category-card"><img src="https://images.unsplash.com/photo-1592982537447-6f2a6a0a2f6a?w=700" alt="Agricultural field"><div class="category-overlay"><h3>🚜 Farm Supplies</h3><p>Agricultural essentials</p></div></div>
 </div>
-<div class="category-card">
-<img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=700" alt="Green farmland">
-<div class="category-overlay"><h3>🌱 Seeds</h3><p>Start your next growing season</p></div>
+</section>
+
+<section id="farm-supplies">
+<div class="section-heading"><span class="badge">FOR EVERY FARMING SEASON</span><h2>Farm Supplies & Essentials</h2><p>Explore essential supplies for crop care, planting, irrigation and everyday farm work.</p></div>
+<div class="farm-intro">
+<div><h2>Everything Your Farm Needs 🌱</h2><p>From preparing the land to protecting growing crops, Jhammat & Khan Zarai Markaz aims to make agricultural essentials easier to find for farmers in Wadhi, Shahpur and nearby communities.</p><a href="#products"><button>Browse Available Products</button></a></div>
+<img src="https://images.unsplash.com/photo-1592982537447-6f2a6a0a2f6a?w=1000" alt="Modern agricultural field and farming equipment" loading="lazy">
 </div>
-<div class="category-card">
-<img src="https://images.unsplash.com/photo-1499529112087-3cb3b73cec95?w=700" alt="Farm crops">
-<div class="category-overlay"><h3>🛡️ Crop Protection</h3><p>Explore crop-care products</p></div>
-</div>
-<div class="category-card">
-<img src="https://images.unsplash.com/photo-1592982537447-6f2a6a0a2f6a?w=700" alt="Agricultural field">
-<div class="category-overlay"><h3>🚜 Farm Supplies</h3><p>Agricultural essentials</p></div>
-</div>
+<div class="farm-grid">
+<div class="farm-card"><img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=700" alt="Fertiliser and crop field" loading="lazy"><div><h3>🌾 Fertilisers</h3><p>Support crop nutrition and healthy plant development with suitable fertiliser products.</p></div></div>
+<div class="farm-card"><img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=700" alt="Agricultural land" loading="lazy"><div><h3>🌱 Seeds</h3><p>Explore seeds for planting and the next growing season.</p></div></div>
+<div class="farm-card"><img src="https://images.unsplash.com/photo-1499529112087-3cb3b73cec95?w=700" alt="Green crops" loading="lazy"><div><h3>🛡️ Crop Protection</h3><p>Find crop-care products for responsible agricultural use.</p></div></div>
+<div class="farm-card"><img src="https://images.unsplash.com/photo-1586771107445-d3ca888129ce?w=700" alt="Tractor in agricultural field" loading="lazy"><div><h3>🚜 Farm Equipment</h3><p>Useful equipment and tools for everyday agricultural activities.</p></div></div>
+<div class="farm-card"><img src="https://images.unsplash.com/photo-1563207153-f403bf289096?w=700" alt="Agricultural irrigation" loading="lazy"><div><h3>💧 Irrigation Essentials</h3><p>Explore supplies that help with water management and irrigation work.</p></div></div>
+<div class="farm-card"><img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=700" alt="Fresh farm produce" loading="lazy"><div><h3>🌿 General Farm Supplies</h3><p>Contact our team about agricultural essentials and product availability.</p></div></div>
 </div>
 </section>
 
 <section id="products" class="products-section">
-<div class="section-heading">
-<span class="badge">SHOP AGRICULTURAL PRODUCTS</span>
-<h2>Our Products</h2>
-<p>Browse available products and contact us directly to order.</p>
-</div>
-<div class="product-tools">
-<input id="search" placeholder="🔍 Search products..." oninput="renderProducts()">
-</div>
+<div class="section-heading"><span class="badge">SHOP AGRICULTURAL PRODUCTS</span><h2>Our Products</h2><p>Browse available products and contact us directly to order.</p></div>
+<div class="product-tools"><input id="search" placeholder="🔍 Search products..." oninput="renderProducts()"></div>
 <div id="productList" class="grid">Loading products...</div>
 </section>
 
 <section id="about">
 <div class="about-strip">
-<div>
-<span class="badge">ABOUT OUR BUSINESS</span>
-<h2>Growing With Our Farmers 🌿</h2>
-<p>Jhammat & Khan Zarai Markaz is based in Wadhi, Shahpur, Sargodha. We aim to support local farmers by providing access to agricultural products and a convenient way to contact our store.</p>
-<p>Our goal is to make finding agricultural supplies easier for our local farming community.</p>
-<div class="about-points">
-<span>🌾 Quality</span>
-<span>🤝 Trust</span>
-<span>🌱 Growth</span>
-</div>
-<a href="https://wa.me/923468600616"><button>Talk to Our Team</button></a>
-</div>
-<img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=900" alt="Agricultural landscape">
+<div><span class="badge">ABOUT OUR BUSINESS</span><h2>Growing With Our Farmers 🌿</h2><p>Jhammat & Khan Zarai Markaz is based in Wadhi, Shahpur, Sargodha. We aim to support local farmers by providing access to agricultural products and a convenient way to contact our store.</p><p>Our goal is to make finding agricultural supplies easier for our local farming community.</p><div class="about-points"><span>🌾 Quality</span><span>🤝 Trust</span><span>🌱 Growth</span></div><a href="https://wa.me/923468600616"><button>Talk to Our Team</button></a></div>
+<img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=900" alt="Agricultural landscape" loading="lazy">
 </div>
 </section>
 
 <section id="contact">
-<div class="contact-card">
-<span class="badge">WE ARE HERE TO HELP</span>
-<h2>Visit or Contact Us</h2>
-<p>📍 Wadhi near PSO Pump, Tehsil Shahpur, District Sargodha, Punjab, Pakistan</p>
-<p>📞 +92 346 8600616</p>
-<a href="https://wa.me/923468600616"><button class="btn-light">Message Us on WhatsApp</button></a>
-</div>
+<div class="contact-card"><span class="badge">WE ARE HERE TO HELP</span><h2>Visit or Contact Us</h2><p>📍 Wadhi near PSO Pump, Tehsil Shahpur, District Sargodha, Punjab, Pakistan</p><p>📞 +92 346 8600616</p><a href="https://wa.me/923468600616"><button class="btn-light">Message Us on WhatsApp</button></a></div>
 </section>
 
 <section id="owner">
 <div class="admin-login">
-<h2>🔐 Owner Login</h2>
-<p class="small">Authorised business management access only.</p>
+<h2>🔐 Owner Login</h2><p class="small">Authorised business management access only.</p>
 <div id="loginBox">
-<label>Owner email</label>
-<input id="email" type="email" placeholder="Owner email" autocomplete="username">
-<label>Password</label>
-<input id="password" type="password" placeholder="Password" autocomplete="current-password">
-<button onclick="login()">Login to Dashboard →</button>
-<p id="loginMessage"></p>
+<label>Owner email</label><input id="email" type="email" placeholder="Owner email" autocomplete="username">
+<label>Password</label><input id="password" type="password" placeholder="Password" autocomplete="current-password">
+<button onclick="login()">Login to Dashboard →</button><p id="loginMessage"></p>
 </div>
 
 <div id="admin" class="hidden">
-<h2 class="admin-title">Shop Management Dashboard</h2>
-<p><span class="badge">OWNER ACCESS</span></p>
-<button onclick="logout()" class="red">Logout</button>
-
+<h2 class="admin-title">Shop Management Dashboard</h2><p><span class="badge">OWNER ACCESS</span></p><button onclick="logout()" class="red">Logout</button>
 <div class="grid" style="margin-top:20px">
-<div class="stat">Products<strong id="statProducts">0</strong></div>
-<div class="stat">Stock units<strong id="statStock">0</strong></div>
-<div class="stat">Total sales<strong id="statSales">PKR 0</strong></div>
-<div class="stat">Expenses<strong id="statExpenses">PKR 0</strong></div>
+<div class="stat">Products<strong id="statProducts">0</strong></div><div class="stat">Stock units<strong id="statStock">0</strong></div><div class="stat">Total sales<strong id="statSales">PKR 0</strong></div><div class="stat">Expenses<strong id="statExpenses">PKR 0</strong></div>
 </div>
 
 <div class="tabs">
 <button onclick="showTab('productsTab')">📦 Products & Stock</button>
-<button onclick="showTab('salesTab')">💰 Sales</button>
+<button onclick="showTab('salesTab')">💰 Sales & Discounts</button>
+<button onclick="showTab('returnsTab')">↩ Returns</button>
 <button onclick="showTab('purchasesTab')">🛒 Purchases</button>
 <button onclick="showTab('expensesTab')">💳 Expenses</button>
 <button onclick="showTab('reportsTab')">📊 Reports</button>
@@ -522,36 +205,47 @@ th{background:#e6f2e8;color:var(--green)}
 </div>
 
 <div id="productsTab" class="panel">
-<h2>Add / Edit Product</h2>
-<input id="productId" type="hidden">
+<h2>Add / Edit Product</h2><input id="productId" type="hidden">
 <label>Product name</label><input id="pName" placeholder="Product name">
-<label>Category</label>
-<select id="pCategory">
-<option>Fertilizers</option><option>Seeds</option><option>Pesticides</option>
-<option>Herbicides</option><option>Insecticides</option><option>Equipment</option><option>Other</option>
-</select>
+<label>Category</label><select id="pCategory"><option>Fertilizers</option><option>Seeds</option><option>Pesticides</option><option>Herbicides</option><option>Insecticides</option><option>Equipment</option><option>Other</option></select>
 <label>Selling price (PKR)</label><input id="pPrice" type="number" min="0">
 <label>Cost price (PKR)</label><input id="pCost" type="number" min="0">
 <label>Stock quantity</label><input id="pStock" type="number" min="0">
 <label>Description</label><textarea id="pDescription"></textarea>
 <label>Product image (optional)</label><input id="pImage" type="file" accept="image/*">
-<button onclick="saveProduct()">Save Product</button>
-<button onclick="clearProduct()" class="red">Clear</button>
-<h3>Manage Products</h3>
-<div id="manageProducts"></div>
+<button onclick="saveProduct()">Save Product</button><button onclick="clearProduct()" class="red">Clear</button>
+<h3>Manage Products</h3><div id="manageProducts"></div>
 </div>
 
 <div id="salesTab" class="panel hidden">
 <h2>Record Sale</h2>
-<label>Sale type</label>
-<select id="saleType"><option>Shop</option><option>Website</option></select>
+<label>Sale type</label><select id="saleType"><option>Shop</option><option>Website</option></select>
 <label>Customer name</label><input id="customerName" placeholder="Customer name">
-<label>Payment method</label>
-<select id="salePayment"><option>Cash</option><option>Bank</option><option>JazzCash</option><option>EasyPaisa</option><option>Credit</option></select>
-<label>Product</label><select id="saleProduct"></select>
-<label>Quantity</label><input id="saleQuantity" type="number" min="0.01" step="0.01" value="1">
+<label>Payment method</label><select id="salePayment"><option>Cash</option><option>Bank</option><option>JazzCash</option><option>EasyPaisa</option><option>Credit</option></select>
+<label>Product</label><select id="saleProduct" onchange="updateSalePreview()"></select>
+<label>Quantity</label><input id="saleQuantity" type="number" min="0.01" step="0.01" value="1" oninput="updateSalePreview()">
+<label>Discount type</label><select id="discountType" onchange="updateSalePreview()"><option value="none">No discount</option><option value="percent">Percentage (%)</option><option value="fixed">Fixed amount (PKR)</option></select>
+<label>Discount value</label><input id="discountValue" type="number" min="0" step="0.01" value="0" oninput="updateSalePreview()">
+<div class="stat" id="salePreview">Subtotal: PKR 0<br>Discount: PKR 0<br><strong>Net total: PKR 0</strong></div>
+<p class="small">Discount is applied to this sale only. The net total is saved in the sales record.</p>
 <button onclick="recordSale()">Save Sale & Generate Receipt</button>
 <h3>Recent Sales</h3><div id="salesList"></div>
+</div>
+
+<div id="returnsTab" class="panel hidden">
+<h2>↩ Returns & Replacements</h2>
+<p class="notice">Select the original sale item. A refund records the refund amount and returns the item quantity to stock. A replacement also returns the original item to stock and deducts the replacement item from stock.</p>
+<label>Original sale item</label><select id="returnSaleItem" onchange="updateReturnPreview()"></select>
+<label>Quantity being returned</label><input id="returnQuantity" type="number" min="0.01" step="0.01" value="1" oninput="updateReturnPreview()">
+<label>Return action</label><select id="returnType" onchange="toggleReplacement()"><option value="Refund">Refund</option><option value="Replacement">Replacement</option></select>
+<div id="refundFields"><label>Refund amount (PKR)</label><input id="refundAmount" type="number" min="0" step="0.01"></div>
+<div id="replacementFields" class="hidden">
+<label>Replacement product</label><select id="replacementProduct"></select>
+<label>Replacement quantity</label><input id="replacementQuantity" type="number" min="0.01" step="0.01" value="1">
+</div>
+<label>Reason for return</label><textarea id="returnReason" placeholder="Reason for return or replacement"></textarea>
+<button onclick="recordReturn()">Save Return / Replacement</button>
+<h3>Return History</h3><div id="returnsList"></div>
 </div>
 
 <div id="purchasesTab" class="panel hidden">
@@ -569,34 +263,23 @@ th{background:#e6f2e8;color:var(--green)}
 <div id="expensesTab" class="panel hidden">
 <h2>Record Shop Expense</h2>
 <label>Expense name</label><input id="expenseName" placeholder="Electricity, rent, transport...">
-<label>Category</label>
-<select id="expenseCategory"><option>Rent</option><option>Electricity</option><option>Transport</option><option>Salary</option><option>Other</option></select>
+<label>Category</label><select id="expenseCategory"><option>Rent</option><option>Electricity</option><option>Transport</option><option>Salary</option><option>Other</option></select>
 <label>Amount (PKR)</label><input id="expenseAmount" type="number" min="0">
-<label>Payment method</label>
-<select id="expensePayment"><option>Cash</option><option>Bank</option><option>JazzCash</option><option>EasyPaisa</option></select>
+<label>Payment method</label><select id="expensePayment"><option>Cash</option><option>Bank</option><option>JazzCash</option><option>EasyPaisa</option></select>
 <label>Notes</label><textarea id="expenseNotes"></textarea>
-<button onclick="recordExpense()">Save Expense</button>
-<h3>Expense History</h3><div id="expensesList"></div>
+<button onclick="recordExpense()">Save Expense</button><h3>Expense History</h3><div id="expensesList"></div>
 </div>
 
 <div id="reportsTab" class="panel hidden">
 <h2>Business Reports</h2>
-<label>Report period</label>
-<select id="reportPeriod" onchange="loadReports()">
-<option value="today">Today</option><option value="week">This week</option>
-<option value="month">This month</option><option value="year">This year</option><option value="all">All time</option>
-</select>
-<div id="reportSummary"></div>
-<button onclick="exportExcel()">Export Excel Report</button>
-<button onclick="exportStock()">Export Stock</button>
+<label>Report period</label><select id="reportPeriod" onchange="loadReports()"><option value="today">Today</option><option value="week">This week</option><option value="month">This month</option><option value="year">This year</option><option value="all">All time</option></select>
+<div id="reportSummary"></div><button onclick="exportExcel()">Export Excel Report</button><button onclick="exportStock()">Export Stock</button>
 <h3>Website Traffic</h3><div id="traffic"></div>
 </div>
 
 <div id="viewersTab" class="panel hidden">
-<h2>👁 Real-Time Website Viewers</h2>
-<div class="stat"><strong id="activeCount">0</strong>People viewing your website now</div>
-<p id="viewerStatus">Waiting for visitor data...</p>
-<button onclick="loadViewers()">Refresh Viewers</button>
+<h2>👁 Real-Time Website Viewers</h2><div class="stat"><strong id="activeCount">0</strong>People viewing your website now</div>
+<p id="viewerStatus">Waiting for visitor data...</p><button onclick="loadViewers()">Refresh Viewers</button>
 <p class="small">Counts browser sessions active within the last 2 minutes.</p>
 </div>
 </div>
@@ -605,423 +288,320 @@ th{background:#e6f2e8;color:var(--green)}
 </main>
 
 <a class="whatsapp-float" href="https://wa.me/923468600616" aria-label="WhatsApp">☏</a>
-
-<footer>
-<h3>🌿 Jhammat & Khan Zarai Markaz</h3>
-<p>Quality Agricultural Products & Farmer Support</p>
-<p>Wadhi, Tehsil Shahpur, District Sargodha</p>
-<p>WhatsApp: +92 346 8600616</p>
-<p>© Jhammat & Khan Zarai Markaz</p>
-</footer>
+<footer><h3>🌿 Jhammat & Khan Zarai Markaz</h3><p>Quality Agricultural Products & Farmer Support</p><p>Wadhi, Tehsil Shahpur, District Sargodha</p><p>WhatsApp: +92 346 8600616</p><p>© Jhammat & Khan Zarai Markaz</p></footer>
 
 <script>
 const SUPABASE_URL="https://kdavpmdioiztfhvdczlz.supabase.co";
-const SUPABASE_KEY="sb_publishable_icXsw0UUDfn1ULktMav2kQ_3C9dUPRm";
+const SUPABASE_KEY="sb_publishable_ICXsw0UUDfn1ULktMav2kQ_3C9dUPRm";
 const db=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 const OWNER_ID="272cec25-35ff-47c8-9ffb-21ed1a69d6f5";
 
-let products=[],sales=[],saleItems=[],purchases=[],purchaseItems=[],expenses=[];
+let products=[],sales=[],saleItems=[],purchases=[],purchaseItems=[],expenses=[],returns=[];
 
-function money(n){
- return "PKR "+Number(n||0).toLocaleString("en-PK",{maximumFractionDigits:2});
-}
-function esc(s){
- return String(s??"").replace(/[&<>"']/g,c=>({
- "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
- }[c]));
-}
+function money(n){return "PKR "+Number(n||0).toLocaleString("en-PK",{maximumFractionDigits:2});}
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function showTab(id){
  document.querySelectorAll("#admin .panel").forEach(x=>x.classList.add("hidden"));
  document.getElementById(id).classList.remove("hidden");
  if(id==="viewersTab")loadViewers();
  if(id==="reportsTab")loadTraffic();
 }
-
 async function login(){
- const {data,error}=await db.auth.signInWithPassword({
- email:document.getElementById("email").value,
- password:document.getElementById("password").value
- });
- if(error){
- document.getElementById("loginMessage").textContent=error.message;
- return;
- }
- if(data.user.id!==OWNER_ID){
- await db.auth.signOut();
- document.getElementById("loginMessage").textContent="This account is not authorised.";
- return;
- }
- document.getElementById("loginMessage").textContent="";
- await openAdmin();
+ const {data,error}=await db.auth.signInWithPassword({email:document.getElementById("email").value,password:document.getElementById("password").value});
+ if(error){document.getElementById("loginMessage").textContent=error.message;return;}
+ if(data.user.id!==OWNER_ID){await db.auth.signOut();document.getElementById("loginMessage").textContent="This account is not authorised.";return;}
+ document.getElementById("loginMessage").textContent="";await openAdmin();
 }
-async function logout(){
- await db.auth.signOut();
- document.getElementById("admin").classList.add("hidden");
- document.getElementById("loginBox").classList.remove("hidden");
-}
-async function openAdmin(){
- document.getElementById("loginBox").classList.add("hidden");
- document.getElementById("admin").classList.remove("hidden");
- await loadAll();
-}
+async function logout(){await db.auth.signOut();document.getElementById("admin").classList.add("hidden");document.getElementById("loginBox").classList.remove("hidden");}
+async function openAdmin(){document.getElementById("loginBox").classList.add("hidden");document.getElementById("admin").classList.remove("hidden");await loadAll();}
 
 async function loadProducts(){
  const {data,error}=await db.from("products").select("*").order("name");
- if(error){
- document.getElementById("productList").textContent="Products could not load: "+error.message;
- return;
- }
- products=data||[];
- renderProducts();
+ if(error){document.getElementById("productList").textContent="Products could not load: "+error.message;return;}
+ products=data||[];renderProducts();
 }
 function productEmoji(category){
  const c=(category||"").toLowerCase();
- if(c.includes("seed"))return "🌱";
- if(c.includes("fertil"))return "🌾";
- if(c.includes("pest")||c.includes("insect"))return "🛡️";
- if(c.includes("herbi"))return "🌿";
- return "🚜";
+ if(c.includes("seed"))return "🌱";if(c.includes("fertil"))return "🌾";
+ if(c.includes("pest")||c.includes("insect"))return "🛡️";if(c.includes("herbi"))return "🌿";return "🚜";
 }
 function renderProducts(){
  const q=(document.getElementById("search").value||"").toLowerCase();
- const list=products.filter(p=>
- (p.name||"").toLowerCase().includes(q)||
- (p.category||"").toLowerCase().includes(q)
- );
- document.getElementById("productList").innerHTML=list.length?
- list.map(p=>`
+ const list=products.filter(p=>(p.name||"").toLowerCase().includes(q)||(p.category||"").toLowerCase().includes(q));
+ document.getElementById("productList").innerHTML=list.length?list.map(p=>`
  <div class="product">
- ${p.image_url?
- `<img src="${esc(p.image_url)}" alt="${esc(p.name)}" loading="lazy">`:
- `<div class="product-placeholder">${productEmoji(p.category)}</div>`}
- <h3>${esc(p.name)}</h3>
- <p>${esc(p.category||"Agricultural product")}</p>
- <p>${esc(p.description||"")}</p>
+ ${p.image_url?`<img src="${esc(p.image_url)}" alt="${esc(p.name)}" loading="lazy">`:`<div class="product-placeholder">${productEmoji(p.category)}</div>`}
+ <h3>${esc(p.name)}</h3><p>${esc(p.category||"Agricultural product")}</p><p>${esc(p.description||"")}</p>
  <p class="price">${money(p.price)}</p>
- <a href="https://wa.me/923468600616?text=${encodeURIComponent("I am interested in "+p.name)}">
- <button>Order on WhatsApp</button></a>
- </div>`).join(""):
- "<p>No products available yet.</p>";
+ <a href="https://wa.me/923468600616?text=${encodeURIComponent("I am interested in "+p.name)}"><button>Order on WhatsApp</button></a>
+ </div>`).join(""):"<p>No products available yet.</p>";
 }
-
 async function saveProduct(){
- const id=document.getElementById("productId").value;
- const name=document.getElementById("pName").value.trim();
- const price=Number(document.getElementById("pPrice").value);
- const cost=Number(document.getElementById("pCost").value);
- const stock=Number(document.getElementById("pStock").value);
- if(!name||!Number.isFinite(price)||price<0||!Number.isFinite(cost)||cost<0||!Number.isFinite(stock)||stock<0){
- alert("Enter valid product details.");return;
- }
- let imageUrl=null;
- const file=document.getElementById("pImage").files[0];
+ const id=document.getElementById("productId").value,name=document.getElementById("pName").value.trim();
+ const price=Number(document.getElementById("pPrice").value),cost=Number(document.getElementById("pCost").value),stock=Number(document.getElementById("pStock").value);
+ if(!name||!Number.isFinite(price)||price<0||!Number.isFinite(cost)||cost<0||!Number.isFinite(stock)||stock<0){alert("Enter valid product details.");return;}
+ let imageUrl=null;const file=document.getElementById("pImage").files[0];
  if(file){
- if(file.size>5*1024*1024){alert("Please use an image smaller than 5 MB.");return;}
- const path=Date.now()+"-"+file.name.replace(/[^a-zA-Z0-9._-]/g,"_");
- const {error}=await db.storage.from("product-images").upload(path,file,{upsert:true});
- if(error){alert("Image upload failed: "+error.message);return;}
- imageUrl=db.storage.from("product-images").getPublicUrl(path).data.publicUrl;
+  if(file.size>5*1024*1024){alert("Please use an image smaller than 5 MB.");return;}
+  const path=Date.now()+"-"+file.name.replace(/[^a-zA-Z0-9._-]/g,"_");
+  const {error}=await db.storage.from("product-images").upload(path,file,{upsert:true});
+  if(error){alert("Image upload failed: "+error.message);return;}
+  imageUrl=db.storage.from("product-images").getPublicUrl(path).data.publicUrl;
  }
- const record={
- name,
- category:document.getElementById("pCategory").value,
- price,cost_price:cost,
- stock_quantity:stock,
- stock_status:stock>0?"In Stock":"Out of Stock",
- description:document.getElementById("pDescription").value
- };
+ const record={name,category:document.getElementById("pCategory").value,price,cost_price:cost,stock_quantity:stock,stock_status:stock>0?"In Stock":"Out of Stock",description:document.getElementById("pDescription").value};
  if(imageUrl)record.image_url=imageUrl;
- const result=id?
- await db.from("products").update(record).eq("id",id):
- await db.from("products").insert(record);
+ const result=id?await db.from("products").update(record).eq("id",id):await db.from("products").insert(record);
  if(result.error){alert(result.error.message);return;}
- alert("Product saved successfully.");
- clearProduct();
- await loadAll();
+ alert("Product saved successfully.");clearProduct();await loadAll();
 }
-function clearProduct(){
- ["productId","pName","pPrice","pCost","pStock","pDescription","pImage"].forEach(id=>{
- document.getElementById(id).value="";
- });
-}
+function clearProduct(){["productId","pName","pPrice","pCost","pStock","pDescription","pImage"].forEach(id=>document.getElementById(id).value="");}
 function editProduct(id){
- const p=products.find(x=>String(x.id)===String(id));
- if(!p)return;
- document.getElementById("productId").value=p.id;
- document.getElementById("pName").value=p.name;
- document.getElementById("pCategory").value=p.category||"Other";
- document.getElementById("pPrice").value=p.price;
- document.getElementById("pCost").value=p.cost_price||0;
- document.getElementById("pStock").value=p.stock_quantity||0;
- document.getElementById("pDescription").value=p.description||"";
- showTab("productsTab");
- window.scrollTo(0,0);
+ const p=products.find(x=>String(x.id)===String(id));if(!p)return;
+ document.getElementById("productId").value=p.id;document.getElementById("pName").value=p.name;
+ document.getElementById("pCategory").value=p.category||"Other";document.getElementById("pPrice").value=p.price;
+ document.getElementById("pCost").value=p.cost_price||0;document.getElementById("pStock").value=p.stock_quantity||0;
+ document.getElementById("pDescription").value=p.description||"";showTab("productsTab");window.scrollTo(0,0);
 }
 async function deleteProduct(id){
  if(!confirm("Delete this product?"))return;
- const {error}=await db.from("products").delete().eq("id",id);
- if(error){alert(error.message);return;}
- await loadAll();
+ const {error}=await db.from("products").delete().eq("id",id);if(error){alert(error.message);return;}await loadAll();
 }
 function renderManage(){
- document.getElementById("manageProducts").innerHTML=products.map(p=>`
- <div class="panel">
- <b>${esc(p.name)}</b> — ${money(p.price)} — Stock: ${p.stock_quantity||0}
- <button onclick="editProduct('${p.id}')">Edit</button>
- <button class="red" onclick="deleteProduct('${p.id}')">Delete</button>
- </div>`).join("")||"No products added.";
- const options=products.map(p=>
- `<option value="${esc(p.id)}">${esc(p.name)} (Stock: ${p.stock_quantity||0})</option>`
- ).join("");
+ document.getElementById("manageProducts").innerHTML=products.map(p=>`<div class="panel"><b>${esc(p.name)}</b> — ${money(p.price)} — Stock: ${p.stock_quantity||0} <button onclick="editProduct('${p.id}')">Edit</button> <button class="red" onclick="deleteProduct('${p.id}')">Delete</button></div>`).join("")||"No products added.";
+ const options=products.map(p=>`<option value="${esc(p.id)}">${esc(p.name)} (Stock: ${p.stock_quantity||0})</option>`).join("");
  document.getElementById("saleProduct").innerHTML=options;
  document.getElementById("purchaseProduct").innerHTML=options;
+ document.getElementById("replacementProduct").innerHTML=options;
  document.getElementById("statProducts").textContent=products.length;
- document.getElementById("statStock").textContent=
- products.reduce((a,p)=>a+Number(p.stock_quantity||0),0);
+ document.getElementById("statStock").textContent=products.reduce((a,p)=>a+Number(p.stock_quantity||0),0);
+ updateSalePreview();
 }
-
-async function recordSale(){
+function calculateDiscount(subtotal,type,value){
+ let discount=0;
+ if(type==="percent")discount=subtotal*Math.min(100,Math.max(0,value))/100;
+ if(type==="fixed")discount=Math.min(subtotal,Math.max(0,value));
+ return Math.min(subtotal,Math.max(0,discount));
+}
+function updateSalePreview(){
  const p=products.find(x=>String(x.id)===document.getElementById("saleProduct").value);
- const qty=Number(document.getElementById("saleQuantity").value);
+ const qty=Number(document.getElementById("saleQuantity").value||0);
+ const subtotal=p&&qty>0?qty*Number(p.price):0;
+ const discount=calculateDiscount(subtotal,document.getElementById("discountType").value,Number(document.getElementById("discountValue").value||0));
+ document.getElementById("salePreview").innerHTML=`Subtotal: ${money(subtotal)}<br>Discount: ${money(discount)}<br><strong>Net total: ${money(subtotal-discount)}</strong>`;
+}
+async function recordSale(){
+ const p=products.find(x=>String(x.id)===document.getElementById("saleProduct").value),qty=Number(document.getElementById("saleQuantity").value);
  if(!p||!Number.isFinite(qty)||qty<=0){alert("Select a product and valid quantity.");return;}
  if(qty>Number(p.stock_quantity||0)){alert("Not enough stock. Please record a purchase first.");return;}
- const total=qty*Number(p.price);
+ const subtotal=qty*Number(p.price),discount=calculateDiscount(subtotal,document.getElementById("discountType").value,Number(document.getElementById("discountValue").value||0)),total=subtotal-discount;
  const {data:s,error}=await db.from("sales").insert({
- sale_type:document.getElementById("saleType").value,
- customer_name:document.getElementById("customerName").value,
- payment_method:document.getElementById("salePayment").value,
- total_amount:total
+  sale_type:document.getElementById("saleType").value,
+  customer_name:document.getElementById("customerName").value,
+  payment_method:document.getElementById("salePayment").value,
+  total_amount:total,discount_amount:discount
  }).select().single();
  if(error){alert(error.message);return;}
- const {error:itemError}=await db.from("sale_items").insert({
- sale_id:s.id,product_name:p.name,quantity:qty,
- unit_price:p.price,unit_cost:p.cost_price||0
- });
- if(itemError){
- await db.from("sales").delete().eq("id",s.id);
- alert(itemError.message);return;
- }
+ const {error:itemError}=await db.from("sale_items").insert({sale_id:s.id,product_name:p.name,quantity:qty,unit_price:p.price,unit_cost:p.cost_price||0});
+ if(itemError){await db.from("sales").delete().eq("id",s.id);alert(itemError.message);return;}
  const newStock=Number(p.stock_quantity)-qty;
- const {error:stockError}=await db.from("products").update({
- stock_quantity:newStock,
- stock_status:newStock>0?"In Stock":"Out of Stock"
- }).eq("id",p.id);
- if(stockError){
- alert("Sale saved, but stock update failed: "+stockError.message);
- }else{
- makeReceipt(s,p,qty);
- alert("Sale recorded.");
- }
+ const {error:stockError}=await db.from("products").update({stock_quantity:newStock,stock_status:newStock>0?"In Stock":"Out of Stock"}).eq("id",p.id);
+ if(stockError){alert("Sale and sale item saved, but stock update failed: "+stockError.message+" Please correct stock manually.");}
+ else{makeReceipt(s,p,qty,subtotal,discount,total);alert("Sale recorded successfully.");}
  await loadAll();
 }
-
-async function recordPurchase(){
- const p=products.find(x=>String(x.id)===document.getElementById("purchaseProduct").value);
- const qty=Number(document.getElementById("purchaseQuantity").value);
- const cost=Number(document.getElementById("purchaseCost").value);
- if(!p||!Number.isFinite(qty)||qty<=0||!Number.isFinite(cost)||cost<0){
- alert("Enter valid purchase details.");return;
- }
- const total=qty*cost;
- const {data:purchase,error}=await db.from("purchases").insert({
- supplier_name:document.getElementById("supplierName").value,
- invoice_number:document.getElementById("invoiceNumber").value,
- total_amount:total,
- notes:document.getElementById("purchaseNotes").value
- }).select().single();
- if(error){alert(error.message);return;}
- const {error:itemError}=await db.from("purchase_items").insert({
- purchase_id:purchase.id,product_name:p.name,quantity:qty,unit_cost:cost
- });
- if(itemError){
- await db.from("purchases").delete().eq("id",purchase.id);
- alert(itemError.message);return;
- }
- const oldQty=Number(p.stock_quantity||0);
- const newQty=oldQty+qty;
- const newCost=newQty?
- ((oldQty*Number(p.cost_price||0))+(qty*cost))/newQty:cost;
- const {error:stockError}=await db.from("products").update({
- stock_quantity:newQty,cost_price:newCost,stock_status:"In Stock"
- }).eq("id",p.id);
- if(stockError){alert("Purchase saved but stock update failed: "+stockError.message);}
- else alert("Purchase recorded and stock updated.");
- await loadAll();
-}
-
-async function recordExpense(){
- const amount=Number(document.getElementById("expenseAmount").value);
- const name=document.getElementById("expenseName").value.trim();
- if(!name||!Number.isFinite(amount)||amount<=0){alert("Enter expense name and amount.");return;}
- const {error}=await db.from("expenses").insert({
- expense_name:name,
- category:document.getElementById("expenseCategory").value,
- amount,
- payment_method:document.getElementById("expensePayment").value,
- notes:document.getElementById("expenseNotes").value
- });
- if(error){alert(error.message);return;}
- alert("Expense saved.");
- document.getElementById("expenseName").value="";
- document.getElementById("expenseAmount").value="";
- document.getElementById("expenseNotes").value="";
- await loadAll();
-}
-
-function makeReceipt(s,p,qty){
- const {jsPDF}=window.jspdf;
- const doc=new jsPDF();
- doc.setFontSize(18);
- doc.text("Jhammat & Khan Zarai Markaz",15,20);
- doc.setFontSize(11);
- doc.text("Wadhi, Tehsil Shahpur, District Sargodha",15,29);
- doc.text("WhatsApp: +92 346 8600616",15,36);
- doc.text("SALES RECEIPT",15,52);
- doc.text("Receipt: "+s.id,15,62);
- doc.text("Date: "+new Date(s.created_at).toLocaleString(),15,70);
+function makeReceipt(s,p,qty,subtotal,discount,total){
+ const {jsPDF}=window.jspdf,doc=new jsPDF();
+ doc.setFontSize(18);doc.text("Jhammat & Khan Zarai Markaz",15,20);
+ doc.setFontSize(11);doc.text("Wadhi, Tehsil Shahpur, District Sargodha",15,29);
+ doc.text("WhatsApp: +92 346 8600616",15,36);doc.text("SALES RECEIPT",15,52);
+ doc.text("Receipt: "+s.id,15,62);doc.text("Date: "+new Date(s.created_at).toLocaleString(),15,70);
  doc.text("Customer: "+(s.customer_name||"Walk-in customer"),15,78);
- doc.text("Product: "+p.name,15,91);
- doc.text("Quantity: "+qty,15,99);
- doc.text("Unit price: "+money(p.price),15,107);
- doc.text("TOTAL: "+money(s.total_amount),15,120);
+ doc.text("Product: "+p.name,15,91);doc.text("Quantity: "+qty,15,99);
+ doc.text("Unit price: "+money(p.price),15,107);doc.text("Subtotal: "+money(subtotal),15,115);
+ doc.text("Discount: -"+money(discount),15,123);doc.setFontSize(14);doc.text("TOTAL: "+money(total),15,135);
  doc.save("receipt-"+s.id+".pdf");
 }
 
-async function loadAll(){
- await loadProducts();
- renderManage();
- const [a,b,c,d,e]=await Promise.all([
- db.from("sales").select("*").order("created_at",{ascending:false}),
- db.from("sale_items").select("*"),
- db.from("purchases").select("*").order("created_at",{ascending:false}),
- db.from("purchase_items").select("*"),
- db.from("expenses").select("*").order("created_at",{ascending:false})
- ]);
- if(a.error||b.error||c.error||d.error||e.error){
- alert("Some records could not load. Check database permissions.");
- return;
+async function recordPurchase(){
+ const p=products.find(x=>String(x.id)===document.getElementById("purchaseProduct").value),qty=Number(document.getElementById("purchaseQuantity").value),cost=Number(document.getElementById("purchaseCost").value);
+ if(!p||!Number.isFinite(qty)||qty<=0||!Number.isFinite(cost)||cost<0){alert("Enter valid purchase details.");return;}
+ const total=qty*cost;
+ const {data:purchase,error}=await db.from("purchases").insert({supplier_name:document.getElementById("supplierName").value,invoice_number:document.getElementById("invoiceNumber").value,total_amount:total,notes:document.getElementById("purchaseNotes").value}).select().single();
+ if(error){alert(error.message);return;}
+ const {error:itemError}=await db.from("purchase_items").insert({purchase_id:purchase.id,product_name:p.name,quantity:qty,unit_cost:cost});
+ if(itemError){await db.from("purchases").delete().eq("id",purchase.id);alert(itemError.message);return;}
+ const oldQty=Number(p.stock_quantity||0),newQty=oldQty+qty,newCost=((oldQty*Number(p.cost_price||0))+(qty*cost))/newQty;
+ const {error:stockError}=await db.from("products").update({stock_quantity:newQty,cost_price:newCost,stock_status:"In Stock"}).eq("id",p.id);
+ if(stockError)alert("Purchase saved but stock update failed: "+stockError.message);else alert("Purchase recorded and stock updated.");
+ await loadAll();
+}
+async function recordExpense(){
+ const amount=Number(document.getElementById("expenseAmount").value),name=document.getElementById("expenseName").value.trim();
+ if(!name||!Number.isFinite(amount)||amount<=0){alert("Enter expense name and amount.");return;}
+ const {error}=await db.from("expenses").insert({expense_name:name,category:document.getElementById("expenseCategory").value,amount,payment_method:document.getElementById("expensePayment").value,notes:document.getElementById("expenseNotes").value});
+ if(error){alert(error.message);return;}
+ alert("Expense saved.");document.getElementById("expenseName").value="";document.getElementById("expenseAmount").value="";document.getElementById("expenseNotes").value="";await loadAll();
+}
+
+/* RETURNS AND REPLACEMENTS */
+function getSelectedReturnItem(){
+ return saleItems.find(i=>String(i.id)===document.getElementById("returnSaleItem").value);
+}
+function updateReturnPreview(){
+ const item=getSelectedReturnItem();if(!item)return;
+ const qty=Number(document.getElementById("returnQuantity").value||0);
+ const refund=qty*Number(item.unit_price||0);
+ document.getElementById("refundAmount").value=refund.toFixed(2);
+}
+function toggleReplacement(){
+ const replacement=document.getElementById("returnType").value==="Replacement";
+ document.getElementById("replacementFields").classList.toggle("hidden",!replacement);
+ document.getElementById("refundFields").classList.toggle("hidden",replacement);
+}
+async function recordReturn(){
+ const item=getSelectedReturnItem(),qty=Number(document.getElementById("returnQuantity").value);
+ if(!item||!Number.isFinite(qty)||qty<=0){alert("Select a sale item and enter a valid return quantity.");return;}
+ const already=returns.filter(r=>String(r.sale_id)===String(item.sale_id)&&r.product_name===item.product_name).reduce((n,r)=>n+Number(r.quantity||0),0);
+ if(qty+already>Number(item.quantity)){alert("The return quantity exceeds the quantity originally sold, after previous returns.");return;}
+ const type=document.getElementById("returnType").value;
+ const refund=type==="Refund"?Number(document.getElementById("refundAmount").value):0;
+ if(!Number.isFinite(refund)||refund<0){alert("Enter a valid refund amount.");return;}
+ let replacement=null,replacementQty=0;
+ if(type==="Replacement"){
+  replacement=products.find(p=>String(p.id)===document.getElementById("replacementProduct").value);
+  replacementQty=Number(document.getElementById("replacementQuantity").value);
+  if(!replacement||!Number.isFinite(replacementQty)||replacementQty<=0){alert("Select a replacement product and valid quantity.");return;}
+  if(replacement.id===item.product_id){/* Product IDs are not stored in sale_items in the current schema; same-name check below. */}
+  if(replacement.name===item.product_name&&replacementQty!==qty){alert("For the same product, replacement quantity must equal the returned quantity.");return;}
+  if(replacement.name!==item.product_name&&replacementQty>Number(replacement.stock_quantity||0)){alert("Not enough stock for the replacement product.");return;}
  }
- sales=a.data||[];
- saleItems=b.data||[];
- purchases=c.data||[];
- purchaseItems=d.data||[];
- expenses=e.data||[];
- document.getElementById("statSales").textContent=
- money(sales.reduce((n,x)=>n+Number(x.total_amount||0),0));
- document.getElementById("statExpenses").textContent=
- money(expenses.reduce((n,x)=>n+Number(x.amount||0),0));
- document.getElementById("salesList").innerHTML=sales.slice(0,30).map(s=>
- `<p>${new Date(s.created_at).toLocaleDateString()} — ${esc(s.customer_name||"Customer")} — ${money(s.total_amount)} — ${esc(s.sale_type)}</p>`
- ).join("")||"No sales yet.";
- document.getElementById("purchasesList").innerHTML=purchases.slice(0,30).map(x=>
- `<p>${new Date(x.created_at).toLocaleDateString()} — ${esc(x.supplier_name||"Supplier")} — ${money(x.total_amount)}</p>`
- ).join("")||"No purchases yet.";
- document.getElementById("expensesList").innerHTML=expenses.slice(0,30).map(x=>
- `<p>${new Date(x.created_at).toLocaleDateString()} — ${esc(x.expense_name)} — ${money(x.amount)}</p>`
- ).join("")||"No expenses yet.";
- loadReports();
+ if(!confirm("Save this "+type.toLowerCase()+" and update stock?"))return;
+ const {error:insertError}=await db.from("sales_returns").insert({
+  sale_id:item.sale_id,product_name:item.product_name,quantity:qty,
+  refund_amount:refund,reason:document.getElementById("returnReason").value,
+  return_type:type
+ });
+ if(insertError){alert("Return could not be saved: "+insertError.message);return;}
+ const original=products.find(p=>p.name===item.product_name);
+ if(original){
+  const updated=Number(original.stock_quantity||0)+qty;
+  const {error}=await db.from("products").update({stock_quantity:updated,stock_status:"In Stock"}).eq("id",original.id);
+  if(error){alert("Return saved, but original stock could not be updated. Please adjust stock manually: "+error.message);await loadAll();return;}
+ }
+ if(type==="Replacement"&&replacement&&replacement.name!==item.product_name){
+  const newStock=Number(replacement.stock_quantity||0)-replacementQty;
+  const {error}=await db.from("products").update({stock_quantity:newStock,stock_status:newStock>0?"In Stock":"Out of Stock"}).eq("id",replacement.id);
+  if(error){alert("Return saved and original stock restored, but replacement stock could not be deducted. Please adjust it manually: "+error.message);await loadAll();return;}
+ }
+ alert(type+" recorded and stock updated.");
+ document.getElementById("returnQuantity").value="1";
+ document.getElementById("returnReason").value="";
+ document.getElementById("refundAmount").value="";
+ await loadAll();
+}
+function renderReturnOptions(){
+ const options=saleItems.map(i=>{
+  const sale=sales.find(s=>String(s.id)===String(i.sale_id));
+  const returned=returns.filter(r=>String(r.sale_id)===String(i.sale_id)&&r.product_name===i.product_name).reduce((n,r)=>n+Number(r.quantity||0),0);
+  const remaining=Math.max(0,Number(i.quantity)-returned);
+  return remaining>0?`<option value="${esc(i.id)}">${esc(i.product_name)} — Sale ${esc(String(i.sale_id).slice(0,8))} — Remaining ${remaining} — ${sale?new Date(sale.created_at).toLocaleDateString():""}</option>`:"";
+ }).join("");
+ document.getElementById("returnSaleItem").innerHTML=options||'<option value="">No eligible sale items</option>';
+ updateReturnPreview();toggleReplacement();
+ document.getElementById("returnsList").innerHTML=returns.slice(0,50).map(r=>`<p>${new Date(r.created_at).toLocaleDateString()} — ${esc(r.product_name)} — Qty: ${r.quantity} — ${esc(r.return_type)} — Refund: ${money(r.refund_amount)} — ${esc(r.reason||"")}</p>`).join("")||"No returns recorded yet.";
+}
+
+async function loadAll(){
+ await loadProducts();renderManage();
+ const [a,b,c,d,e,f]=await Promise.all([
+  db.from("sales").select("*").order("created_at",{ascending:false}),
+  db.from("sale_items").select("*"),
+  db.from("purchases").select("*").order("created_at",{ascending:false}),
+  db.from("purchase_items").select("*"),
+  db.from("expenses").select("*").order("created_at",{ascending:false}),
+  db.from("sales_returns").select("*").order("created_at",{ascending:false})
+ ]);
+ if(a.error||b.error||c.error||d.error||e.error||f.error){
+  alert("Some records could not load. Check database permissions. "+[a.error,b.error,c.error,d.error,e.error,f.error].filter(Boolean).map(x=>x.message).join(" | "));
+  return;
+ }
+ sales=a.data||[];saleItems=b.data||[];purchases=c.data||[];purchaseItems=d.data||[];expenses=e.data||[];returns=f.data||[];
+ document.getElementById("statSales").textContent=money(sales.reduce((n,x)=>n+Number(x.total_amount||0),0));
+ document.getElementById("statExpenses").textContent=money(expenses.reduce((n,x)=>n+Number(x.amount||0),0));
+ document.getElementById("salesList").innerHTML=sales.slice(0,30).map(s=>`<p>${new Date(s.created_at).toLocaleDateString()} — ${esc(s.customer_name||"Customer")} — ${money(s.total_amount)} — Discount: ${money(s.discount_amount)} — ${esc(s.sale_type)}</p>`).join("")||"No sales yet.";
+ document.getElementById("purchasesList").innerHTML=purchases.slice(0,30).map(x=>`<p>${new Date(x.created_at).toLocaleDateString()} — ${esc(x.supplier_name||"Supplier")} — ${money(x.total_amount)}</p>`).join("")||"No purchases yet.";
+ document.getElementById("expensesList").innerHTML=expenses.slice(0,30).map(x=>`<p>${new Date(x.created_at).toLocaleDateString()} — ${esc(x.expense_name)} — ${money(x.amount)}</p>`).join("")||"No expenses yet.";
+ renderReturnOptions();loadReports();
 }
 
 function periodStart(period){
- const d=new Date();
- d.setHours(0,0,0,0);
+ const d=new Date();d.setHours(0,0,0,0);
  if(period==="today")return d;
- if(period==="week"){
- d.setDate(d.getDate()-((d.getDay()+6)%7));return d;
- }
+ if(period==="week"){d.setDate(d.getDate()-((d.getDay()+6)%7));return d;}
  if(period==="month"){d.setDate(1);return d;}
  if(period==="year"){d.setMonth(0,1);return d;}
  return new Date(0);
 }
 function loadReports(){
- const period=document.getElementById("reportPeriod").value;
- const start=periodStart(period);
- const ss=sales.filter(x=>new Date(x.created_at)>=start);
- const ee=expenses.filter(x=>new Date(x.created_at)>=start);
- const items=saleItems.filter(i=>ss.some(s=>s.id===i.sale_id));
+ const period=document.getElementById("reportPeriod").value,start=periodStart(period);
+ const ss=sales.filter(x=>new Date(x.created_at)>=start),ee=expenses.filter(x=>new Date(x.created_at)>=start);
+ const rr=returns.filter(x=>new Date(x.created_at)>=start);
+ const items=saleItems.filter(i=>ss.some(s=>String(s.id)===String(i.sale_id)));
  const revenue=ss.reduce((n,x)=>n+Number(x.total_amount||0),0);
- const gross=items.reduce((n,x)=>n+
- (Number(x.unit_price)-Number(x.unit_cost||0))*Number(x.quantity),0);
- const ex=ee.reduce((n,x)=>n+Number(x.amount||0),0);
- document.getElementById("reportSummary").innerHTML=`
- <div class="grid">
- <div class="stat">Sales<strong>${money(revenue)}</strong></div>
- <div class="stat">Gross profit<strong>${money(gross)}</strong></div>
+ const discounts=ss.reduce((n,x)=>n+Number(x.discount_amount||0),0);
+ const gross=items.reduce((n,x)=>n+(Number(x.unit_price)-Number(x.unit_cost||0))*Number(x.quantity),0);
+ const ex=ee.reduce((n,x)=>n+Number(x.amount||0),0),refunds=rr.reduce((n,x)=>n+Number(x.refund_amount||0),0);
+ document.getElementById("reportSummary").innerHTML=`<div class="grid">
+ <div class="stat">Net sales<strong>${money(revenue)}</strong></div>
+ <div class="stat">Discounts<strong>${money(discounts)}</strong></div>
+ <div class="stat">Estimated gross profit before returns<strong>${money(gross-discounts)}</strong></div>
  <div class="stat">Expenses<strong>${money(ex)}</strong></div>
- <div class="stat">Net profit<strong>${money(gross-ex)}</strong></div>
- </div><p>Sales transactions: ${ss.length}</p>`;
+ <div class="stat">Refunds<strong>${money(refunds)}</strong></div>
+ <div class="stat">Estimated net profit<strong>${money(gross-discounts-ex-refunds)}</strong></div>
+ </div><p>Sales transactions: ${ss.length} | Returns: ${rr.length}</p>
+ <p class="small">Profit is an estimate based on recorded sale-item costs. Replacement stock movements are not valued as cash refunds.</p>`;
 }
 function exportExcel(){
  const wb=XLSX.utils.book_new();
- function sheet(name,data){
- XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(data),name);
- }
- sheet("Sales",sales);
- sheet("Sale Items",saleItems);
- sheet("Purchases",purchases);
- sheet("Purchase Items",purchaseItems);
- sheet("Expenses",expenses);
+ function sheet(name,data){XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(data),name);}
+ sheet("Sales",sales);sheet("Sale Items",saleItems);sheet("Returns",returns);
+ sheet("Purchases",purchases);sheet("Purchase Items",purchaseItems);sheet("Expenses",expenses);
  XLSX.writeFile(wb,"Jhammat-Khan-Business-Report.xlsx");
 }
 function exportStock(){
  const wb=XLSX.utils.book_new();
- XLSX.utils.book_append_sheet(wb,
- XLSX.utils.json_to_sheet(products.map(p=>({
- Product:p.name,Category:p.category,Price:p.price,
- Cost:p.cost_price,Stock:p.stock_quantity
- }))),"Stock");
+ XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(products.map(p=>({Product:p.name,Category:p.category,Price:p.price,Cost:p.cost_price,Stock:p.stock_quantity}))),"Stock");
  XLSX.writeFile(wb,"Shop-Stock.xlsx");
 }
-
 async function loadTraffic(){
  const {data,error}=await db.from("site_visits").select("visited_at");
- if(error){
- document.getElementById("traffic").textContent="Traffic data unavailable.";
- return;
- }
+ if(error){document.getElementById("traffic").textContent="Traffic data unavailable.";return;}
  const today=new Date().toISOString().slice(0,10);
- document.getElementById("traffic").textContent=
- "Total page visits: "+data.length+" | Today: "+
- data.filter(x=>x.visited_at.slice(0,10)===today).length;
+ document.getElementById("traffic").textContent="Total page visits: "+data.length+" | Today: "+data.filter(x=>x.visited_at.slice(0,10)===today).length;
 }
 async function recordVisit(){
  const {error}=await db.from("site_visits").insert({page:location.pathname});
  if(error)console.warn("Visit tracking:",error.message);
 }
-
-/* REAL-TIME VIEWERS */
 let visitorSessionId=localStorage.getItem("jk_visitor_session");
 if(!visitorSessionId){
- visitorSessionId=(crypto.randomUUID?
- crypto.randomUUID():"v-"+Date.now()+"-"+Math.random().toString(36).slice(2));
+ visitorSessionId=(crypto.randomUUID?crypto.randomUUID():"v-"+Date.now()+"-"+Math.random().toString(36).slice(2));
  localStorage.setItem("jk_visitor_session",visitorSessionId);
 }
 async function sendVisitorHeartbeat(){
- const {error}=await db.rpc("record_visitor_heartbeat",{
- p_session_id:visitorSessionId,
- p_page:location.pathname
- });
+ const {error}=await db.rpc("record_visitor_heartbeat",{p_session_id:visitorSessionId,p_page:location.pathname});
  if(error)console.error("Visitor heartbeat:",error.message);
 }
 async function loadViewers(){
- const status=document.getElementById("viewerStatus");
- const count=document.getElementById("activeCount");
+ const status=document.getElementById("viewerStatus"),count=document.getElementById("activeCount");
  status.textContent="Loading viewers...";
  const cutoff=new Date(Date.now()-120000).toISOString();
- const {data,error}=await db.from("active_visitors")
- .select("session_id,last_seen,page").gte("last_seen",cutoff);
- if(error){
- status.textContent="Could not load viewers: "+error.message;
- return;
- }
- count.textContent=(data||[]).length;
- status.textContent="Active browser sessions in the last 2 minutes. Updated "+new Date().toLocaleTimeString();
+ const {data,error}=await db.from("active_visitors").select("session_id,last_seen,page").gte("last_seen",cutoff);
+ if(error){status.textContent="Could not load viewers: "+error.message;return;}
+ count.textContent=(data||[]).length;status.textContent="Active browser sessions in the last 2 minutes. Updated "+new Date().toLocaleTimeString();
 }
-
 async function start(){
- await recordVisit();
- await sendVisitorHeartbeat();
- setInterval(sendVisitorHeartbeat,30000);
+ await recordVisit();await sendVisitorHeartbeat();setInterval(sendVisitorHeartbeat,30000);
  await loadProducts();
  const {data}=await db.auth.getSession();
  if(data.session&&data.session.user.id===OWNER_ID)await openAdmin();
